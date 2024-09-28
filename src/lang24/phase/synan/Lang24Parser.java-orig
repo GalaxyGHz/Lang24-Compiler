@@ -1,0 +1,2596 @@
+// Generated from Lang24Parser.g4 by ANTLR 4.13.1
+
+
+	package lang24.phase.synan;
+	
+	import java.util.*;
+	import lang24.common.report.*;
+	import lang24.data.token.*;
+	import lang24.phase.lexan.*;
+	import lang24.data.ast.tree.*;
+	import lang24.data.ast.tree.defn.*;
+	import lang24.data.ast.tree.type.*;
+	import lang24.data.ast.tree.expr.*;
+	import lang24.data.ast.tree.stmt.*;
+
+
+import org.antlr.v4.runtime.atn.*;
+import org.antlr.v4.runtime.dfa.DFA;
+import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.misc.*;
+import org.antlr.v4.runtime.tree.*;
+import java.util.List;
+import java.util.Iterator;
+import java.util.ArrayList;
+
+@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast", "CheckReturnValue"})
+public class Lang24Parser extends Parser {
+	static { RuntimeMetaData.checkVersion("4.13.1", RuntimeMetaData.VERSION); }
+
+	protected static final DFA[] _decisionToDFA;
+	protected static final PredictionContextCache _sharedContextCache =
+		new PredictionContextCache();
+	public static final int
+		INTCONST=1, CHARCONST=2, STRINGCONST=3, LEFTPAREN=4, RIGHTPAREN=5, LEFTBRACE=6, 
+		RIGHTBRACE=7, LEFTBRACKET=8, RIGHTBRACKET=9, DOT=10, COMMA=11, COLON=12, 
+		SEMICOLON=13, EQUAL=14, NOTEQUAL=15, LESS=16, GREATER=17, LESSEQUAL=18, 
+		GREATEREQUAL=19, STAR=20, DIV=21, MOD=22, PLUS=23, MINUS=24, CARET=25, 
+		ASSIGN=26, AND=27, BOOL=28, CHAR=29, ELSE=30, IF=31, INT=32, NIL=33, NONE=34, 
+		NOT=35, OR=36, SIZEOF=37, THEN=38, RETURN=39, VOID=40, WHILE=41, TRUE=42, 
+		FALSE=43, IDENTIFIER=44, COMMENT=45, TAB=46, WS=47, ERROR=48;
+	public static final int
+		RULE_source = 0, RULE_definitions = 1, RULE_definition = 2, RULE_type_definition = 3, 
+		RULE_variable_definition = 4, RULE_function_definition = 5, RULE_parameters = 6, 
+		RULE_parameter = 7, RULE_statement = 8, RULE_statements = 9, RULE_type = 10, 
+		RULE_components = 11, RULE_component = 12, RULE_expression = 13, RULE_conjunctive = 14, 
+		RULE_relational = 15, RULE_additive = 16, RULE_multiplicative = 17, RULE_prefix = 18, 
+		RULE_postfix = 19, RULE_sizeparen = 20, RULE_terminal = 21, RULE_expressions = 22;
+	private static String[] makeRuleNames() {
+		return new String[] {
+			"source", "definitions", "definition", "type_definition", "variable_definition", 
+			"function_definition", "parameters", "parameter", "statement", "statements", 
+			"type", "components", "component", "expression", "conjunctive", "relational", 
+			"additive", "multiplicative", "prefix", "postfix", "sizeparen", "terminal", 
+			"expressions"
+		};
+	}
+	public static final String[] ruleNames = makeRuleNames();
+
+	private static String[] makeLiteralNames() {
+		return new String[] {
+			null, null, null, null, "'('", "')'", "'{'", "'}'", "'['", "']'", "'.'", 
+			"','", "':'", "';'", "'=='", "'!='", "'<'", "'>'", "'<='", "'>='", "'*'", 
+			"'/'", "'%'", "'+'", "'-'", "'^'", "'='", "'and'", "'bool'", "'char'", 
+			"'else'", "'if'", "'int'", "'nil'", "'none'", "'not'", "'or'", "'sizeof'", 
+			"'then'", "'return'", "'void'", "'while'", "'true'", "'false'"
+		};
+	}
+	private static final String[] _LITERAL_NAMES = makeLiteralNames();
+	private static String[] makeSymbolicNames() {
+		return new String[] {
+			null, "INTCONST", "CHARCONST", "STRINGCONST", "LEFTPAREN", "RIGHTPAREN", 
+			"LEFTBRACE", "RIGHTBRACE", "LEFTBRACKET", "RIGHTBRACKET", "DOT", "COMMA", 
+			"COLON", "SEMICOLON", "EQUAL", "NOTEQUAL", "LESS", "GREATER", "LESSEQUAL", 
+			"GREATEREQUAL", "STAR", "DIV", "MOD", "PLUS", "MINUS", "CARET", "ASSIGN", 
+			"AND", "BOOL", "CHAR", "ELSE", "IF", "INT", "NIL", "NONE", "NOT", "OR", 
+			"SIZEOF", "THEN", "RETURN", "VOID", "WHILE", "TRUE", "FALSE", "IDENTIFIER", 
+			"COMMENT", "TAB", "WS", "ERROR"
+		};
+	}
+	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
+	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
+
+	/**
+	 * @deprecated Use {@link #VOCABULARY} instead.
+	 */
+	@Deprecated
+	public static final String[] tokenNames;
+	static {
+		tokenNames = new String[_SYMBOLIC_NAMES.length];
+		for (int i = 0; i < tokenNames.length; i++) {
+			tokenNames[i] = VOCABULARY.getLiteralName(i);
+			if (tokenNames[i] == null) {
+				tokenNames[i] = VOCABULARY.getSymbolicName(i);
+			}
+
+			if (tokenNames[i] == null) {
+				tokenNames[i] = "<INVALID>";
+			}
+		}
+	}
+
+	@Override
+	@Deprecated
+	public String[] getTokenNames() {
+		return tokenNames;
+	}
+
+	@Override
+
+	public Vocabulary getVocabulary() {
+		return VOCABULARY;
+	}
+
+	@Override
+	public String getGrammarFileName() { return "Lang24Parser.g4"; }
+
+	@Override
+	public String[] getRuleNames() { return ruleNames; }
+
+	@Override
+	public String getSerializedATN() { return _serializedATN; }
+
+	@Override
+	public ATN getATN() { return _ATN; }
+
+
+
+		private Location loc(Token tok) { return new Location((LocLogToken)tok); }
+		private Location loc(Token     tok1, Token     tok2) { return new Location((LocLogToken)tok1, (LocLogToken)tok2); }
+		private Location loc(Token     tok1, Locatable loc2) { return new Location((LocLogToken)tok1, loc2); }
+		private Location loc(Locatable loc1, Token     tok2) { return new Location(loc1, (LocLogToken)tok2); }
+		private Location loc(Locatable loc1, Locatable loc2) { return new Location(loc1, loc2); }
+
+
+	public Lang24Parser(TokenStream input) {
+		super(input);
+		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class SourceContext extends ParserRuleContext {
+		public AstNode ast;
+		public DefinitionsContext definitions;
+		public DefinitionsContext definitions() {
+			return getRuleContext(DefinitionsContext.class,0);
+		}
+		public TerminalNode EOF() { return getToken(Lang24Parser.EOF, 0); }
+		public SourceContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_source; }
+	}
+
+	public final SourceContext source() throws RecognitionException {
+		SourceContext _localctx = new SourceContext(_ctx, getState());
+		enterRule(_localctx, 0, RULE_source);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(46);
+			((SourceContext)_localctx).definitions = definitions();
+			setState(47);
+			match(EOF);
+			((SourceContext)_localctx).ast =  new AstNodes<AstDefn>(((SourceContext)_localctx).definitions.list);
+			}
+		}
+		catch (Exception e) {
+
+					Token token = getCurrentToken();
+					Locatable location = new Location(token.getLine(), token.getCharPositionInLine());
+					throw new Report.Error(location, "Syntax error at '" + token.getText() + "': Check your type, variable and function definitions!");
+				
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class DefinitionsContext extends ParserRuleContext {
+		public List list;
+		public DefinitionContext definition;
+		public DefinitionsContext d;
+		public DefinitionContext definition() {
+			return getRuleContext(DefinitionContext.class,0);
+		}
+		public DefinitionsContext definitions() {
+			return getRuleContext(DefinitionsContext.class,0);
+		}
+		public DefinitionsContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_definitions; }
+	}
+
+	public final DefinitionsContext definitions() throws RecognitionException {
+		DefinitionsContext _localctx = new DefinitionsContext(_ctx, getState());
+		enterRule(_localctx, 2, RULE_definitions);
+		((DefinitionsContext)_localctx).list =  new ArrayList<AstDefn>();
+		try {
+			setState(57);
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,0,_ctx) ) {
+			case 1:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(50);
+				((DefinitionsContext)_localctx).definition = definition();
+				_localctx.list.add(((DefinitionsContext)_localctx).definition.ast);
+				}
+				break;
+			case 2:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(53);
+				((DefinitionsContext)_localctx).definition = definition();
+				setState(54);
+				((DefinitionsContext)_localctx).d = definitions();
+				_localctx.list.add(((DefinitionsContext)_localctx).definition.ast); _localctx.list.addAll(((DefinitionsContext)_localctx).d.list);
+				}
+				break;
+			}
+		}
+		catch (Exception e) {
+
+					Token token = getCurrentToken();
+					Locatable location = new Location(token.getLine(), token.getCharPositionInLine());
+					throw new Report.Error(location, "Syntax error at '" + token.getText() + "': Check your type, variable and function definitions!");
+				
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class DefinitionContext extends ParserRuleContext {
+		public AstNode ast;
+		public Type_definitionContext type_definition;
+		public Variable_definitionContext variable_definition;
+		public Function_definitionContext function_definition;
+		public Type_definitionContext type_definition() {
+			return getRuleContext(Type_definitionContext.class,0);
+		}
+		public Variable_definitionContext variable_definition() {
+			return getRuleContext(Variable_definitionContext.class,0);
+		}
+		public Function_definitionContext function_definition() {
+			return getRuleContext(Function_definitionContext.class,0);
+		}
+		public DefinitionContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_definition; }
+	}
+
+	public final DefinitionContext definition() throws RecognitionException {
+		DefinitionContext _localctx = new DefinitionContext(_ctx, getState());
+		enterRule(_localctx, 4, RULE_definition);
+		try {
+			setState(68);
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,1,_ctx) ) {
+			case 1:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(59);
+				((DefinitionContext)_localctx).type_definition = type_definition();
+				((DefinitionContext)_localctx).ast =  ((DefinitionContext)_localctx).type_definition.ast;
+				}
+				break;
+			case 2:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(62);
+				((DefinitionContext)_localctx).variable_definition = variable_definition();
+				((DefinitionContext)_localctx).ast =  ((DefinitionContext)_localctx).variable_definition.ast;
+				}
+				break;
+			case 3:
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(65);
+				((DefinitionContext)_localctx).function_definition = function_definition();
+				((DefinitionContext)_localctx).ast =  ((DefinitionContext)_localctx).function_definition.ast;
+				}
+				break;
+			}
+		}
+		catch (Exception e) {
+
+					Token token = getCurrentToken();
+					Locatable location = new Location(token.getLine(), token.getCharPositionInLine());
+					throw new Report.Error(location, "Syntax error at '" + token.getText() + "': Check your type, variable and function definitions!");
+				
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class Type_definitionContext extends ParserRuleContext {
+		public AstNode ast;
+		public Token IDENTIFIER;
+		public TypeContext type;
+		public TerminalNode IDENTIFIER() { return getToken(Lang24Parser.IDENTIFIER, 0); }
+		public TerminalNode ASSIGN() { return getToken(Lang24Parser.ASSIGN, 0); }
+		public TypeContext type() {
+			return getRuleContext(TypeContext.class,0);
+		}
+		public Type_definitionContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_type_definition; }
+	}
+
+	public final Type_definitionContext type_definition() throws RecognitionException {
+		Type_definitionContext _localctx = new Type_definitionContext(_ctx, getState());
+		enterRule(_localctx, 6, RULE_type_definition);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(70);
+			((Type_definitionContext)_localctx).IDENTIFIER = match(IDENTIFIER);
+			setState(71);
+			match(ASSIGN);
+			setState(72);
+			((Type_definitionContext)_localctx).type = type();
+			((Type_definitionContext)_localctx).ast =  new AstTypDefn(loc(((Type_definitionContext)_localctx).IDENTIFIER, ((Type_definitionContext)_localctx).type.ast.location()), (((Type_definitionContext)_localctx).IDENTIFIER!=null?((Type_definitionContext)_localctx).IDENTIFIER.getText():null), ((Type_definitionContext)_localctx).type.ast);
+			}
+		}
+		catch (Exception e) {
+
+					Token token = getCurrentToken();
+					Locatable location = new Location(token.getLine(), token.getCharPositionInLine());
+					throw new Report.Error(location, "Syntax error at '" + token.getText() + "': Check your type definitions!");
+				
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class Variable_definitionContext extends ParserRuleContext {
+		public AstNode ast;
+		public Token IDENTIFIER;
+		public TypeContext type;
+		public TerminalNode IDENTIFIER() { return getToken(Lang24Parser.IDENTIFIER, 0); }
+		public TerminalNode COLON() { return getToken(Lang24Parser.COLON, 0); }
+		public TypeContext type() {
+			return getRuleContext(TypeContext.class,0);
+		}
+		public Variable_definitionContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_variable_definition; }
+	}
+
+	public final Variable_definitionContext variable_definition() throws RecognitionException {
+		Variable_definitionContext _localctx = new Variable_definitionContext(_ctx, getState());
+		enterRule(_localctx, 8, RULE_variable_definition);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(75);
+			((Variable_definitionContext)_localctx).IDENTIFIER = match(IDENTIFIER);
+			setState(76);
+			match(COLON);
+			setState(77);
+			((Variable_definitionContext)_localctx).type = type();
+			((Variable_definitionContext)_localctx).ast =  new AstVarDefn(loc(((Variable_definitionContext)_localctx).IDENTIFIER, ((Variable_definitionContext)_localctx).type.ast.location()), (((Variable_definitionContext)_localctx).IDENTIFIER!=null?((Variable_definitionContext)_localctx).IDENTIFIER.getText():null), ((Variable_definitionContext)_localctx).type.ast);
+			}
+		}
+		catch (Exception e) {
+
+					Token token = getCurrentToken();
+					Locatable location = new Location(token.getLine(), token.getCharPositionInLine());
+					throw new Report.Error(location, "Syntax error at '" + token.getText() + "': Check your variable definitions!");
+				
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class Function_definitionContext extends ParserRuleContext {
+		public AstNode ast;
+		public Token IDENTIFIER;
+		public ParametersContext parameters;
+		public TypeContext type;
+		public StatementContext statement;
+		public DefinitionsContext definitions;
+		public Token RIGHTBRACE;
+		public TerminalNode IDENTIFIER() { return getToken(Lang24Parser.IDENTIFIER, 0); }
+		public TerminalNode LEFTPAREN() { return getToken(Lang24Parser.LEFTPAREN, 0); }
+		public TerminalNode RIGHTPAREN() { return getToken(Lang24Parser.RIGHTPAREN, 0); }
+		public TerminalNode COLON() { return getToken(Lang24Parser.COLON, 0); }
+		public TypeContext type() {
+			return getRuleContext(TypeContext.class,0);
+		}
+		public ParametersContext parameters() {
+			return getRuleContext(ParametersContext.class,0);
+		}
+		public TerminalNode ASSIGN() { return getToken(Lang24Parser.ASSIGN, 0); }
+		public StatementContext statement() {
+			return getRuleContext(StatementContext.class,0);
+		}
+		public TerminalNode LEFTBRACE() { return getToken(Lang24Parser.LEFTBRACE, 0); }
+		public DefinitionsContext definitions() {
+			return getRuleContext(DefinitionsContext.class,0);
+		}
+		public TerminalNode RIGHTBRACE() { return getToken(Lang24Parser.RIGHTBRACE, 0); }
+		public Function_definitionContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_function_definition; }
+	}
+
+	public final Function_definitionContext function_definition() throws RecognitionException {
+		Function_definitionContext _localctx = new Function_definitionContext(_ctx, getState());
+		enterRule(_localctx, 10, RULE_function_definition);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(80);
+			((Function_definitionContext)_localctx).IDENTIFIER = match(IDENTIFIER);
+			setState(81);
+			match(LEFTPAREN);
+			setState(83);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if (_la==CARET || _la==IDENTIFIER) {
+				{
+				setState(82);
+				((Function_definitionContext)_localctx).parameters = parameters();
+				}
+			}
+
+			setState(85);
+			match(RIGHTPAREN);
+			setState(86);
+			match(COLON);
+			setState(87);
+			((Function_definitionContext)_localctx).type = type();
+			setState(96);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if (_la==ASSIGN) {
+				{
+				setState(88);
+				match(ASSIGN);
+				setState(89);
+				((Function_definitionContext)_localctx).statement = statement();
+				setState(94);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				if (_la==LEFTBRACE) {
+					{
+					setState(90);
+					match(LEFTBRACE);
+					setState(91);
+					((Function_definitionContext)_localctx).definitions = definitions();
+					setState(92);
+					((Function_definitionContext)_localctx).RIGHTBRACE = match(RIGHTBRACE);
+					}
+				}
+
+				}
+			}
+
+
+
+					AstNodes<AstFunDefn.AstParDefn> params;
+					if (((Function_definitionContext)_localctx).parameters != null) params = new AstNodes<AstFunDefn.AstParDefn>(((Function_definitionContext)_localctx).parameters.list);
+					//else params = new AstNodes<AstFunDefn.AstParDefn>(new ArrayList<>());
+					else params = null;
+
+					AstNodes<AstDefn> defs;
+					if (((Function_definitionContext)_localctx).definitions != null) defs = new AstNodes<AstDefn>(((Function_definitionContext)_localctx).definitions.list);
+					//else defs = new AstNodes<AstDefn>(new ArrayList<>());
+					else defs = null;
+
+					if (((Function_definitionContext)_localctx).RIGHTBRACE != null) {
+						((Function_definitionContext)_localctx).ast =  new AstFunDefn(loc(((Function_definitionContext)_localctx).IDENTIFIER, ((Function_definitionContext)_localctx).RIGHTBRACE), (((Function_definitionContext)_localctx).IDENTIFIER!=null?((Function_definitionContext)_localctx).IDENTIFIER.getText():null), params, ((Function_definitionContext)_localctx).type.ast, ((Function_definitionContext)_localctx).statement.ast, defs);
+					} else if (((Function_definitionContext)_localctx).statement != null) {
+						((Function_definitionContext)_localctx).ast =  new AstFunDefn(loc(((Function_definitionContext)_localctx).IDENTIFIER, ((Function_definitionContext)_localctx).statement.ast.location()), (((Function_definitionContext)_localctx).IDENTIFIER!=null?((Function_definitionContext)_localctx).IDENTIFIER.getText():null), params, ((Function_definitionContext)_localctx).type.ast, ((Function_definitionContext)_localctx).statement.ast, defs);
+					} else {
+						((Function_definitionContext)_localctx).ast =  new AstFunDefn(loc(((Function_definitionContext)_localctx).IDENTIFIER, ((Function_definitionContext)_localctx).type.ast.location()), (((Function_definitionContext)_localctx).IDENTIFIER!=null?((Function_definitionContext)_localctx).IDENTIFIER.getText():null), params, ((Function_definitionContext)_localctx).type.ast, null, defs);
+					}
+				
+			}
+		}
+		catch (Exception e) {
+
+					Token token = getCurrentToken();
+					Locatable location = new Location(token.getLine(), token.getCharPositionInLine());
+					throw new Report.Error(location, "Syntax error at '" + token.getText() + "': Check your function definitions!");
+				
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class ParametersContext extends ParserRuleContext {
+		public List list;
+		public ParameterContext parameter;
+		public ParametersContext p;
+		public ParameterContext parameter() {
+			return getRuleContext(ParameterContext.class,0);
+		}
+		public TerminalNode COMMA() { return getToken(Lang24Parser.COMMA, 0); }
+		public ParametersContext parameters() {
+			return getRuleContext(ParametersContext.class,0);
+		}
+		public ParametersContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_parameters; }
+	}
+
+	public final ParametersContext parameters() throws RecognitionException {
+		ParametersContext _localctx = new ParametersContext(_ctx, getState());
+		enterRule(_localctx, 12, RULE_parameters);
+		((ParametersContext)_localctx).list =  new ArrayList<AstFunDefn.AstRefParDefn>();
+		try {
+			setState(108);
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,5,_ctx) ) {
+			case 1:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(100);
+				((ParametersContext)_localctx).parameter = parameter();
+				setState(101);
+				match(COMMA);
+				setState(102);
+				((ParametersContext)_localctx).p = parameters();
+				_localctx.list.add(((ParametersContext)_localctx).parameter.ast); _localctx.list.addAll(((ParametersContext)_localctx).p.list);
+				}
+				break;
+			case 2:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(105);
+				((ParametersContext)_localctx).parameter = parameter();
+				_localctx.list.add(((ParametersContext)_localctx).parameter.ast);
+				}
+				break;
+			}
+		}
+		catch (Exception e) {
+
+					Token token = getCurrentToken();
+					Locatable location = new Location(token.getLine(), token.getCharPositionInLine());
+					throw new Report.Error(location, "Syntax error at '" + token.getText() + "': Check your function parameters!");
+				
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class ParameterContext extends ParserRuleContext {
+		public AstNode ast;
+		public Token CARET;
+		public Token IDENTIFIER;
+		public TypeContext type;
+		public TerminalNode CARET() { return getToken(Lang24Parser.CARET, 0); }
+		public TerminalNode IDENTIFIER() { return getToken(Lang24Parser.IDENTIFIER, 0); }
+		public TerminalNode COLON() { return getToken(Lang24Parser.COLON, 0); }
+		public TypeContext type() {
+			return getRuleContext(TypeContext.class,0);
+		}
+		public ParameterContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_parameter; }
+	}
+
+	public final ParameterContext parameter() throws RecognitionException {
+		ParameterContext _localctx = new ParameterContext(_ctx, getState());
+		enterRule(_localctx, 14, RULE_parameter);
+		try {
+			setState(121);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case CARET:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(110);
+				((ParameterContext)_localctx).CARET = match(CARET);
+				setState(111);
+				((ParameterContext)_localctx).IDENTIFIER = match(IDENTIFIER);
+				setState(112);
+				match(COLON);
+				setState(113);
+				((ParameterContext)_localctx).type = type();
+				((ParameterContext)_localctx).ast =  new AstFunDefn.AstRefParDefn(loc(((ParameterContext)_localctx).CARET, ((ParameterContext)_localctx).type.ast.location()), (((ParameterContext)_localctx).IDENTIFIER!=null?((ParameterContext)_localctx).IDENTIFIER.getText():null), ((ParameterContext)_localctx).type.ast);
+				}
+				break;
+			case IDENTIFIER:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(116);
+				((ParameterContext)_localctx).IDENTIFIER = match(IDENTIFIER);
+				setState(117);
+				match(COLON);
+				setState(118);
+				((ParameterContext)_localctx).type = type();
+				((ParameterContext)_localctx).ast =  new AstFunDefn.AstValParDefn(loc(((ParameterContext)_localctx).IDENTIFIER, ((ParameterContext)_localctx).type.ast.location()), (((ParameterContext)_localctx).IDENTIFIER!=null?((ParameterContext)_localctx).IDENTIFIER.getText():null), ((ParameterContext)_localctx).type.ast);
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+		}
+		catch (Exception e) {
+
+					Token token = getCurrentToken();
+					Locatable location = new Location(token.getLine(), token.getCharPositionInLine());
+					throw new Report.Error(location, "Syntax error at '" + token.getText() + "': Check your function parameters!");
+				
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class StatementContext extends ParserRuleContext {
+		public AstStmt ast;
+		public ExpressionContext expression;
+		public Token SEMICOLON;
+		public ExpressionContext e1;
+		public ExpressionContext e2;
+		public Token IF;
+		public StatementContext s1;
+		public StatementContext s2;
+		public Token WHILE;
+		public StatementContext s;
+		public Token RETURN;
+		public Token LEFTBRACE;
+		public StatementsContext ss;
+		public Token RIGHTBRACE;
+		public List<ExpressionContext> expression() {
+			return getRuleContexts(ExpressionContext.class);
+		}
+		public ExpressionContext expression(int i) {
+			return getRuleContext(ExpressionContext.class,i);
+		}
+		public TerminalNode SEMICOLON() { return getToken(Lang24Parser.SEMICOLON, 0); }
+		public TerminalNode ASSIGN() { return getToken(Lang24Parser.ASSIGN, 0); }
+		public TerminalNode IF() { return getToken(Lang24Parser.IF, 0); }
+		public TerminalNode THEN() { return getToken(Lang24Parser.THEN, 0); }
+		public List<StatementContext> statement() {
+			return getRuleContexts(StatementContext.class);
+		}
+		public StatementContext statement(int i) {
+			return getRuleContext(StatementContext.class,i);
+		}
+		public TerminalNode ELSE() { return getToken(Lang24Parser.ELSE, 0); }
+		public TerminalNode WHILE() { return getToken(Lang24Parser.WHILE, 0); }
+		public TerminalNode COLON() { return getToken(Lang24Parser.COLON, 0); }
+		public TerminalNode RETURN() { return getToken(Lang24Parser.RETURN, 0); }
+		public TerminalNode LEFTBRACE() { return getToken(Lang24Parser.LEFTBRACE, 0); }
+		public TerminalNode RIGHTBRACE() { return getToken(Lang24Parser.RIGHTBRACE, 0); }
+		public StatementsContext statements() {
+			return getRuleContext(StatementsContext.class,0);
+		}
+		public StatementContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_statement; }
+	}
+
+	public final StatementContext statement() throws RecognitionException {
+		StatementContext _localctx = new StatementContext(_ctx, getState());
+		enterRule(_localctx, 16, RULE_statement);
+		try {
+			setState(159);
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,8,_ctx) ) {
+			case 1:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(123);
+				((StatementContext)_localctx).expression = expression(0);
+				setState(124);
+				((StatementContext)_localctx).SEMICOLON = match(SEMICOLON);
+				((StatementContext)_localctx).ast =  new AstExprStmt(loc(((StatementContext)_localctx).expression.ast.location(), ((StatementContext)_localctx).SEMICOLON), ((StatementContext)_localctx).expression.ast);
+				}
+				break;
+			case 2:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(127);
+				((StatementContext)_localctx).e1 = expression(0);
+				setState(128);
+				match(ASSIGN);
+				setState(129);
+				((StatementContext)_localctx).e2 = expression(0);
+				setState(130);
+				((StatementContext)_localctx).SEMICOLON = match(SEMICOLON);
+				((StatementContext)_localctx).ast =  new AstAssignStmt(loc(((StatementContext)_localctx).e1.ast.location(), ((StatementContext)_localctx).SEMICOLON), ((StatementContext)_localctx).e1.ast, ((StatementContext)_localctx).e2.ast);
+				}
+				break;
+			case 3:
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(133);
+				((StatementContext)_localctx).IF = match(IF);
+				setState(134);
+				((StatementContext)_localctx).expression = expression(0);
+				setState(135);
+				match(THEN);
+				setState(136);
+				((StatementContext)_localctx).s1 = statement();
+				setState(139);
+				_errHandler.sync(this);
+				switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
+				case 1:
+					{
+					setState(137);
+					match(ELSE);
+					setState(138);
+					((StatementContext)_localctx).s2 = statement();
+					}
+					break;
+				}
+
+						if (((StatementContext)_localctx).s2 != null) {
+							((StatementContext)_localctx).ast =  new AstIfStmt(loc(((StatementContext)_localctx).IF, ((StatementContext)_localctx).s2.ast.location()), ((StatementContext)_localctx).expression.ast, ((StatementContext)_localctx).s1.ast, ((StatementContext)_localctx).s2.ast);
+						} else {
+							((StatementContext)_localctx).ast =  new AstIfStmt(loc(((StatementContext)_localctx).IF, ((StatementContext)_localctx).s1.ast.location()), ((StatementContext)_localctx).expression.ast, ((StatementContext)_localctx).s1.ast, null);
+						}
+					
+				}
+				break;
+			case 4:
+				enterOuterAlt(_localctx, 4);
+				{
+				setState(143);
+				((StatementContext)_localctx).WHILE = match(WHILE);
+				setState(144);
+				((StatementContext)_localctx).expression = expression(0);
+				setState(145);
+				match(COLON);
+				setState(146);
+				((StatementContext)_localctx).s = statement();
+				((StatementContext)_localctx).ast =  new AstWhileStmt(loc(((StatementContext)_localctx).WHILE, ((StatementContext)_localctx).s.ast.location()), ((StatementContext)_localctx).expression.ast, ((StatementContext)_localctx).s.ast);
+				}
+				break;
+			case 5:
+				enterOuterAlt(_localctx, 5);
+				{
+				setState(149);
+				((StatementContext)_localctx).RETURN = match(RETURN);
+				setState(150);
+				((StatementContext)_localctx).expression = expression(0);
+				setState(151);
+				((StatementContext)_localctx).SEMICOLON = match(SEMICOLON);
+				((StatementContext)_localctx).ast =  new AstReturnStmt(loc(((StatementContext)_localctx).RETURN, ((StatementContext)_localctx).SEMICOLON), ((StatementContext)_localctx).expression.ast);
+				}
+				break;
+			case 6:
+				enterOuterAlt(_localctx, 6);
+				{
+				setState(154);
+				((StatementContext)_localctx).LEFTBRACE = match(LEFTBRACE);
+				setState(155);
+				((StatementContext)_localctx).ss = statements();
+				setState(156);
+				((StatementContext)_localctx).RIGHTBRACE = match(RIGHTBRACE);
+				((StatementContext)_localctx).ast =  new AstBlockStmt(loc(((StatementContext)_localctx).LEFTBRACE, ((StatementContext)_localctx).RIGHTBRACE), ((StatementContext)_localctx).ss.list);
+				}
+				break;
+			}
+		}
+		catch (Exception e) {
+
+					Token token = getCurrentToken();
+					Locatable location = new Location(token.getLine(), token.getCharPositionInLine());
+					throw new Report.Error(location, "Syntax error at '" + token.getText() + "': Check your statements!");
+				
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class StatementsContext extends ParserRuleContext {
+		public List list;
+		public StatementContext statement;
+		public StatementsContext s;
+		public StatementContext statement() {
+			return getRuleContext(StatementContext.class,0);
+		}
+		public StatementsContext statements() {
+			return getRuleContext(StatementsContext.class,0);
+		}
+		public StatementsContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_statements; }
+	}
+
+	public final StatementsContext statements() throws RecognitionException {
+		StatementsContext _localctx = new StatementsContext(_ctx, getState());
+		enterRule(_localctx, 18, RULE_statements);
+		((StatementsContext)_localctx).list =  new ArrayList<AstStmt>();
+		try {
+			setState(168);
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,9,_ctx) ) {
+			case 1:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(161);
+				((StatementsContext)_localctx).statement = statement();
+				_localctx.list.add(((StatementsContext)_localctx).statement.ast);
+				}
+				break;
+			case 2:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(164);
+				((StatementsContext)_localctx).statement = statement();
+				setState(165);
+				((StatementsContext)_localctx).s = statements();
+				_localctx.list.add(((StatementsContext)_localctx).statement.ast); _localctx.list.addAll(((StatementsContext)_localctx).s.list);
+				}
+				break;
+			}
+		}
+		catch (Exception e) {
+
+					Token token = getCurrentToken();
+					Locatable location = new Location(token.getLine(), token.getCharPositionInLine());
+					throw new Report.Error(location, "Syntax error at '" + token.getText() + "': Check your statements!");
+				
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class TypeContext extends ParserRuleContext {
+		public AstType ast;
+		public Token VOID;
+		public Token BOOL;
+		public Token CHAR;
+		public Token INT;
+		public Token LEFTBRACKET;
+		public Token INTCONST;
+		public TypeContext t;
+		public Token CARET;
+		public Token LEFTPAREN;
+		public ComponentsContext components;
+		public Token RIGHTPAREN;
+		public Token LEFTBRACE;
+		public Token RIGHTBRACE;
+		public Token IDENTIFIER;
+		public TerminalNode VOID() { return getToken(Lang24Parser.VOID, 0); }
+		public TerminalNode BOOL() { return getToken(Lang24Parser.BOOL, 0); }
+		public TerminalNode CHAR() { return getToken(Lang24Parser.CHAR, 0); }
+		public TerminalNode INT() { return getToken(Lang24Parser.INT, 0); }
+		public TerminalNode LEFTBRACKET() { return getToken(Lang24Parser.LEFTBRACKET, 0); }
+		public TerminalNode INTCONST() { return getToken(Lang24Parser.INTCONST, 0); }
+		public TerminalNode RIGHTBRACKET() { return getToken(Lang24Parser.RIGHTBRACKET, 0); }
+		public TypeContext type() {
+			return getRuleContext(TypeContext.class,0);
+		}
+		public TerminalNode CARET() { return getToken(Lang24Parser.CARET, 0); }
+		public TerminalNode LEFTPAREN() { return getToken(Lang24Parser.LEFTPAREN, 0); }
+		public ComponentsContext components() {
+			return getRuleContext(ComponentsContext.class,0);
+		}
+		public TerminalNode RIGHTPAREN() { return getToken(Lang24Parser.RIGHTPAREN, 0); }
+		public TerminalNode LEFTBRACE() { return getToken(Lang24Parser.LEFTBRACE, 0); }
+		public TerminalNode RIGHTBRACE() { return getToken(Lang24Parser.RIGHTBRACE, 0); }
+		public TerminalNode IDENTIFIER() { return getToken(Lang24Parser.IDENTIFIER, 0); }
+		public TypeContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_type; }
+	}
+
+	public final TypeContext type() throws RecognitionException {
+		TypeContext _localctx = new TypeContext(_ctx, getState());
+		enterRule(_localctx, 20, RULE_type);
+		try {
+			setState(200);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case VOID:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(170);
+				((TypeContext)_localctx).VOID = match(VOID);
+				((TypeContext)_localctx).ast =  new AstAtomType(loc(((TypeContext)_localctx).VOID), AstAtomType.Type.VOID);
+				}
+				break;
+			case BOOL:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(172);
+				((TypeContext)_localctx).BOOL = match(BOOL);
+				((TypeContext)_localctx).ast =  new AstAtomType(loc(((TypeContext)_localctx).BOOL), AstAtomType.Type.BOOL);
+				}
+				break;
+			case CHAR:
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(174);
+				((TypeContext)_localctx).CHAR = match(CHAR);
+				((TypeContext)_localctx).ast =  new AstAtomType(loc(((TypeContext)_localctx).CHAR), AstAtomType.Type.CHAR);
+				}
+				break;
+			case INT:
+				enterOuterAlt(_localctx, 4);
+				{
+				setState(176);
+				((TypeContext)_localctx).INT = match(INT);
+				((TypeContext)_localctx).ast =  new AstAtomType(loc(((TypeContext)_localctx).INT), AstAtomType.Type.INT);
+				}
+				break;
+			case LEFTBRACKET:
+				enterOuterAlt(_localctx, 5);
+				{
+				setState(178);
+				((TypeContext)_localctx).LEFTBRACKET = match(LEFTBRACKET);
+				setState(179);
+				((TypeContext)_localctx).INTCONST = match(INTCONST);
+				setState(180);
+				match(RIGHTBRACKET);
+				setState(181);
+				((TypeContext)_localctx).t = type();
+				((TypeContext)_localctx).ast =  new AstArrType(loc(((TypeContext)_localctx).LEFTBRACKET, ((TypeContext)_localctx).t.ast.location()), 
+																					((TypeContext)_localctx).t.ast, 
+																					new AstAtomExpr(loc(((TypeContext)_localctx).INTCONST),
+																									AstAtomExpr.Type.INT, 
+																									(((TypeContext)_localctx).INTCONST!=null?((TypeContext)_localctx).INTCONST.getText():null)));
+				}
+				break;
+			case CARET:
+				enterOuterAlt(_localctx, 6);
+				{
+				setState(184);
+				((TypeContext)_localctx).CARET = match(CARET);
+				setState(185);
+				((TypeContext)_localctx).t = type();
+				((TypeContext)_localctx).ast =  new AstPtrType(loc(((TypeContext)_localctx).CARET, ((TypeContext)_localctx).t.ast.location()), ((TypeContext)_localctx).t.ast);
+				}
+				break;
+			case LEFTPAREN:
+				enterOuterAlt(_localctx, 7);
+				{
+				setState(188);
+				((TypeContext)_localctx).LEFTPAREN = match(LEFTPAREN);
+				setState(189);
+				((TypeContext)_localctx).components = components();
+				setState(190);
+				((TypeContext)_localctx).RIGHTPAREN = match(RIGHTPAREN);
+				((TypeContext)_localctx).ast =  new AstStrType(loc(((TypeContext)_localctx).LEFTPAREN, ((TypeContext)_localctx).RIGHTPAREN), new AstNodes<AstRecType.AstCmpDefn>(((TypeContext)_localctx).components.list));
+				}
+				break;
+			case LEFTBRACE:
+				enterOuterAlt(_localctx, 8);
+				{
+				setState(193);
+				((TypeContext)_localctx).LEFTBRACE = match(LEFTBRACE);
+				setState(194);
+				((TypeContext)_localctx).components = components();
+				setState(195);
+				((TypeContext)_localctx).RIGHTBRACE = match(RIGHTBRACE);
+				((TypeContext)_localctx).ast =  new AstUniType(loc(((TypeContext)_localctx).LEFTBRACE, ((TypeContext)_localctx).RIGHTBRACE), new AstNodes<AstRecType.AstCmpDefn>(((TypeContext)_localctx).components.list));
+				}
+				break;
+			case IDENTIFIER:
+				enterOuterAlt(_localctx, 9);
+				{
+				setState(198);
+				((TypeContext)_localctx).IDENTIFIER = match(IDENTIFIER);
+				((TypeContext)_localctx).ast =  new AstNameType(loc(((TypeContext)_localctx).IDENTIFIER), (((TypeContext)_localctx).IDENTIFIER!=null?((TypeContext)_localctx).IDENTIFIER.getText():null));
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+		}
+		catch (Exception e) {
+
+					Token token = getCurrentToken();
+					Locatable location = new Location(token.getLine(), token.getCharPositionInLine());
+					throw new Report.Error(location, "Syntax error at '" + token.getText() + "': Check your types!");
+				
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class ComponentsContext extends ParserRuleContext {
+		public List list;
+		public ComponentContext component;
+		public ComponentsContext c;
+		public ComponentContext component() {
+			return getRuleContext(ComponentContext.class,0);
+		}
+		public TerminalNode COMMA() { return getToken(Lang24Parser.COMMA, 0); }
+		public ComponentsContext components() {
+			return getRuleContext(ComponentsContext.class,0);
+		}
+		public ComponentsContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_components; }
+	}
+
+	public final ComponentsContext components() throws RecognitionException {
+		ComponentsContext _localctx = new ComponentsContext(_ctx, getState());
+		enterRule(_localctx, 22, RULE_components);
+		((ComponentsContext)_localctx).list =  new ArrayList<AstRecType.AstCmpDefn>();
+		try {
+			setState(210);
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,11,_ctx) ) {
+			case 1:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(202);
+				((ComponentsContext)_localctx).component = component();
+				_localctx.list.add(((ComponentsContext)_localctx).component.ast);
+				}
+				break;
+			case 2:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(205);
+				((ComponentsContext)_localctx).component = component();
+				setState(206);
+				match(COMMA);
+				setState(207);
+				((ComponentsContext)_localctx).c = components();
+				_localctx.list.add(((ComponentsContext)_localctx).component.ast); _localctx.list.addAll(((ComponentsContext)_localctx).c.list);
+				}
+				break;
+			}
+		}
+		catch (Exception e) {
+
+					Token token = getCurrentToken();
+					Locatable location = new Location(token.getLine(), token.getCharPositionInLine());
+					throw new Report.Error(location, "Syntax error at '" + token.getText() + "': Check your type components!");
+				
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class ComponentContext extends ParserRuleContext {
+		public AstNode ast;
+		public Token IDENTIFIER;
+		public TypeContext type;
+		public TerminalNode IDENTIFIER() { return getToken(Lang24Parser.IDENTIFIER, 0); }
+		public TerminalNode COLON() { return getToken(Lang24Parser.COLON, 0); }
+		public TypeContext type() {
+			return getRuleContext(TypeContext.class,0);
+		}
+		public ComponentContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_component; }
+	}
+
+	public final ComponentContext component() throws RecognitionException {
+		ComponentContext _localctx = new ComponentContext(_ctx, getState());
+		enterRule(_localctx, 24, RULE_component);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(212);
+			((ComponentContext)_localctx).IDENTIFIER = match(IDENTIFIER);
+			setState(213);
+			match(COLON);
+			setState(214);
+			((ComponentContext)_localctx).type = type();
+			((ComponentContext)_localctx).ast =  new AstRecType.AstCmpDefn(loc(((ComponentContext)_localctx).IDENTIFIER, ((ComponentContext)_localctx).type.ast.location()), (((ComponentContext)_localctx).IDENTIFIER!=null?((ComponentContext)_localctx).IDENTIFIER.getText():null), ((ComponentContext)_localctx).type.ast);
+			}
+		}
+		catch (Exception e) {
+
+					Token token = getCurrentToken();
+					Locatable location = new Location(token.getLine(), token.getCharPositionInLine());
+					throw new Report.Error(location, "Syntax error at '" + token.getText() + "': Check your type components!");
+				
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class ExpressionContext extends ParserRuleContext {
+		public AstExpr ast;
+		public ExpressionContext e;
+		public ConjunctiveContext conjunctive;
+		public ConjunctiveContext conjunctive() {
+			return getRuleContext(ConjunctiveContext.class,0);
+		}
+		public TerminalNode OR() { return getToken(Lang24Parser.OR, 0); }
+		public ExpressionContext expression() {
+			return getRuleContext(ExpressionContext.class,0);
+		}
+		public ExpressionContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_expression; }
+	}
+
+	public final ExpressionContext expression() throws RecognitionException {
+		return expression(0);
+	}
+
+	private ExpressionContext expression(int _p) throws RecognitionException {
+		ParserRuleContext _parentctx = _ctx;
+		int _parentState = getState();
+		ExpressionContext _localctx = new ExpressionContext(_ctx, _parentState);
+		ExpressionContext _prevctx = _localctx;
+		int _startState = 26;
+		enterRecursionRule(_localctx, 26, RULE_expression, _p);
+		try {
+			int _alt;
+			enterOuterAlt(_localctx, 1);
+			{
+			{
+			setState(218);
+			((ExpressionContext)_localctx).conjunctive = conjunctive(0);
+			((ExpressionContext)_localctx).ast =  ((ExpressionContext)_localctx).conjunctive.ast;
+			}
+			_ctx.stop = _input.LT(-1);
+			setState(228);
+			_errHandler.sync(this);
+			_alt = getInterpreter().adaptivePredict(_input,12,_ctx);
+			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
+				if ( _alt==1 ) {
+					if ( _parseListeners!=null ) triggerExitRuleEvent();
+					_prevctx = _localctx;
+					{
+					{
+					_localctx = new ExpressionContext(_parentctx, _parentState);
+					_localctx.e = _prevctx;
+					pushNewRecursionContext(_localctx, _startState, RULE_expression);
+					setState(221);
+					if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
+					setState(222);
+					match(OR);
+					setState(223);
+					((ExpressionContext)_localctx).conjunctive = conjunctive(0);
+
+					          		((ExpressionContext)_localctx).ast =  new AstBinExpr(loc(((ExpressionContext)_localctx).e.ast.location(), ((ExpressionContext)_localctx).conjunctive.ast.location()), AstBinExpr.Oper.OR, ((ExpressionContext)_localctx).e.ast, ((ExpressionContext)_localctx).conjunctive.ast);
+					          	
+					}
+					} 
+				}
+				setState(230);
+				_errHandler.sync(this);
+				_alt = getInterpreter().adaptivePredict(_input,12,_ctx);
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			unrollRecursionContexts(_parentctx);
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class ConjunctiveContext extends ParserRuleContext {
+		public AstExpr ast;
+		public ConjunctiveContext c;
+		public RelationalContext relational;
+		public RelationalContext relational() {
+			return getRuleContext(RelationalContext.class,0);
+		}
+		public TerminalNode AND() { return getToken(Lang24Parser.AND, 0); }
+		public ConjunctiveContext conjunctive() {
+			return getRuleContext(ConjunctiveContext.class,0);
+		}
+		public ConjunctiveContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_conjunctive; }
+	}
+
+	public final ConjunctiveContext conjunctive() throws RecognitionException {
+		return conjunctive(0);
+	}
+
+	private ConjunctiveContext conjunctive(int _p) throws RecognitionException {
+		ParserRuleContext _parentctx = _ctx;
+		int _parentState = getState();
+		ConjunctiveContext _localctx = new ConjunctiveContext(_ctx, _parentState);
+		ConjunctiveContext _prevctx = _localctx;
+		int _startState = 28;
+		enterRecursionRule(_localctx, 28, RULE_conjunctive, _p);
+		try {
+			int _alt;
+			enterOuterAlt(_localctx, 1);
+			{
+			{
+			setState(232);
+			((ConjunctiveContext)_localctx).relational = relational(0);
+			((ConjunctiveContext)_localctx).ast =  ((ConjunctiveContext)_localctx).relational.ast;
+			}
+			_ctx.stop = _input.LT(-1);
+			setState(242);
+			_errHandler.sync(this);
+			_alt = getInterpreter().adaptivePredict(_input,13,_ctx);
+			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
+				if ( _alt==1 ) {
+					if ( _parseListeners!=null ) triggerExitRuleEvent();
+					_prevctx = _localctx;
+					{
+					{
+					_localctx = new ConjunctiveContext(_parentctx, _parentState);
+					_localctx.c = _prevctx;
+					pushNewRecursionContext(_localctx, _startState, RULE_conjunctive);
+					setState(235);
+					if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
+					setState(236);
+					match(AND);
+					setState(237);
+					((ConjunctiveContext)_localctx).relational = relational(0);
+
+					          		((ConjunctiveContext)_localctx).ast =  new AstBinExpr(loc(((ConjunctiveContext)_localctx).c.ast.location(), ((ConjunctiveContext)_localctx).relational.ast.location()), AstBinExpr.Oper.AND, ((ConjunctiveContext)_localctx).c.ast, ((ConjunctiveContext)_localctx).relational.ast);
+					          	
+					}
+					} 
+				}
+				setState(244);
+				_errHandler.sync(this);
+				_alt = getInterpreter().adaptivePredict(_input,13,_ctx);
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			unrollRecursionContexts(_parentctx);
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class RelationalContext extends ParserRuleContext {
+		public AstExpr ast;
+		public RelationalContext r;
+		public AdditiveContext additive;
+		public AdditiveContext additive() {
+			return getRuleContext(AdditiveContext.class,0);
+		}
+		public TerminalNode EQUAL() { return getToken(Lang24Parser.EQUAL, 0); }
+		public RelationalContext relational() {
+			return getRuleContext(RelationalContext.class,0);
+		}
+		public TerminalNode NOTEQUAL() { return getToken(Lang24Parser.NOTEQUAL, 0); }
+		public TerminalNode LESS() { return getToken(Lang24Parser.LESS, 0); }
+		public TerminalNode GREATER() { return getToken(Lang24Parser.GREATER, 0); }
+		public TerminalNode LESSEQUAL() { return getToken(Lang24Parser.LESSEQUAL, 0); }
+		public TerminalNode GREATEREQUAL() { return getToken(Lang24Parser.GREATEREQUAL, 0); }
+		public RelationalContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_relational; }
+	}
+
+	public final RelationalContext relational() throws RecognitionException {
+		return relational(0);
+	}
+
+	private RelationalContext relational(int _p) throws RecognitionException {
+		ParserRuleContext _parentctx = _ctx;
+		int _parentState = getState();
+		RelationalContext _localctx = new RelationalContext(_ctx, _parentState);
+		RelationalContext _prevctx = _localctx;
+		int _startState = 30;
+		enterRecursionRule(_localctx, 30, RULE_relational, _p);
+		try {
+			int _alt;
+			enterOuterAlt(_localctx, 1);
+			{
+			{
+			setState(246);
+			((RelationalContext)_localctx).additive = additive(0);
+			((RelationalContext)_localctx).ast =  ((RelationalContext)_localctx).additive.ast;
+			}
+			_ctx.stop = _input.LT(-1);
+			setState(281);
+			_errHandler.sync(this);
+			_alt = getInterpreter().adaptivePredict(_input,15,_ctx);
+			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
+				if ( _alt==1 ) {
+					if ( _parseListeners!=null ) triggerExitRuleEvent();
+					_prevctx = _localctx;
+					{
+					setState(279);
+					_errHandler.sync(this);
+					switch ( getInterpreter().adaptivePredict(_input,14,_ctx) ) {
+					case 1:
+						{
+						_localctx = new RelationalContext(_parentctx, _parentState);
+						_localctx.r = _prevctx;
+						pushNewRecursionContext(_localctx, _startState, RULE_relational);
+						setState(249);
+						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
+						setState(250);
+						match(EQUAL);
+						setState(251);
+						((RelationalContext)_localctx).additive = additive(0);
+						((RelationalContext)_localctx).ast =  new AstBinExpr(loc(((RelationalContext)_localctx).r.ast.location(), ((RelationalContext)_localctx).additive.ast.location()), AstBinExpr.Oper.EQU, ((RelationalContext)_localctx).r.ast, ((RelationalContext)_localctx).additive.ast);
+						}
+						break;
+					case 2:
+						{
+						_localctx = new RelationalContext(_parentctx, _parentState);
+						_localctx.r = _prevctx;
+						pushNewRecursionContext(_localctx, _startState, RULE_relational);
+						setState(254);
+						if (!(precpred(_ctx, 6))) throw new FailedPredicateException(this, "precpred(_ctx, 6)");
+						setState(255);
+						match(NOTEQUAL);
+						setState(256);
+						((RelationalContext)_localctx).additive = additive(0);
+						((RelationalContext)_localctx).ast =  new AstBinExpr(loc(((RelationalContext)_localctx).r.ast.location(), ((RelationalContext)_localctx).additive.ast.location()), AstBinExpr.Oper.NEQ, ((RelationalContext)_localctx).r.ast, ((RelationalContext)_localctx).additive.ast);
+						}
+						break;
+					case 3:
+						{
+						_localctx = new RelationalContext(_parentctx, _parentState);
+						_localctx.r = _prevctx;
+						pushNewRecursionContext(_localctx, _startState, RULE_relational);
+						setState(259);
+						if (!(precpred(_ctx, 5))) throw new FailedPredicateException(this, "precpred(_ctx, 5)");
+						setState(260);
+						match(LESS);
+						setState(261);
+						((RelationalContext)_localctx).additive = additive(0);
+						((RelationalContext)_localctx).ast =  new AstBinExpr(loc(((RelationalContext)_localctx).r.ast.location(), ((RelationalContext)_localctx).additive.ast.location()), AstBinExpr.Oper.LTH, ((RelationalContext)_localctx).r.ast, ((RelationalContext)_localctx).additive.ast);
+						}
+						break;
+					case 4:
+						{
+						_localctx = new RelationalContext(_parentctx, _parentState);
+						_localctx.r = _prevctx;
+						pushNewRecursionContext(_localctx, _startState, RULE_relational);
+						setState(264);
+						if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
+						setState(265);
+						match(GREATER);
+						setState(266);
+						((RelationalContext)_localctx).additive = additive(0);
+						((RelationalContext)_localctx).ast =  new AstBinExpr(loc(((RelationalContext)_localctx).r.ast.location(), ((RelationalContext)_localctx).additive.ast.location()), AstBinExpr.Oper.GTH, ((RelationalContext)_localctx).r.ast, ((RelationalContext)_localctx).additive.ast);
+						}
+						break;
+					case 5:
+						{
+						_localctx = new RelationalContext(_parentctx, _parentState);
+						_localctx.r = _prevctx;
+						pushNewRecursionContext(_localctx, _startState, RULE_relational);
+						setState(269);
+						if (!(precpred(_ctx, 3))) throw new FailedPredicateException(this, "precpred(_ctx, 3)");
+						setState(270);
+						match(LESSEQUAL);
+						setState(271);
+						((RelationalContext)_localctx).additive = additive(0);
+						((RelationalContext)_localctx).ast =  new AstBinExpr(loc(((RelationalContext)_localctx).r.ast.location(), ((RelationalContext)_localctx).additive.ast.location()), AstBinExpr.Oper.LEQ, ((RelationalContext)_localctx).r.ast, ((RelationalContext)_localctx).additive.ast);
+						}
+						break;
+					case 6:
+						{
+						_localctx = new RelationalContext(_parentctx, _parentState);
+						_localctx.r = _prevctx;
+						pushNewRecursionContext(_localctx, _startState, RULE_relational);
+						setState(274);
+						if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
+						setState(275);
+						match(GREATEREQUAL);
+						setState(276);
+						((RelationalContext)_localctx).additive = additive(0);
+						((RelationalContext)_localctx).ast =  new AstBinExpr(loc(((RelationalContext)_localctx).r.ast.location(), ((RelationalContext)_localctx).additive.ast.location()), AstBinExpr.Oper.GEQ, ((RelationalContext)_localctx).r.ast, ((RelationalContext)_localctx).additive.ast);
+						}
+						break;
+					}
+					} 
+				}
+				setState(283);
+				_errHandler.sync(this);
+				_alt = getInterpreter().adaptivePredict(_input,15,_ctx);
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			unrollRecursionContexts(_parentctx);
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class AdditiveContext extends ParserRuleContext {
+		public AstExpr ast;
+		public AdditiveContext a;
+		public MultiplicativeContext multiplicative;
+		public MultiplicativeContext multiplicative() {
+			return getRuleContext(MultiplicativeContext.class,0);
+		}
+		public TerminalNode PLUS() { return getToken(Lang24Parser.PLUS, 0); }
+		public AdditiveContext additive() {
+			return getRuleContext(AdditiveContext.class,0);
+		}
+		public TerminalNode MINUS() { return getToken(Lang24Parser.MINUS, 0); }
+		public AdditiveContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_additive; }
+	}
+
+	public final AdditiveContext additive() throws RecognitionException {
+		return additive(0);
+	}
+
+	private AdditiveContext additive(int _p) throws RecognitionException {
+		ParserRuleContext _parentctx = _ctx;
+		int _parentState = getState();
+		AdditiveContext _localctx = new AdditiveContext(_ctx, _parentState);
+		AdditiveContext _prevctx = _localctx;
+		int _startState = 32;
+		enterRecursionRule(_localctx, 32, RULE_additive, _p);
+		try {
+			int _alt;
+			enterOuterAlt(_localctx, 1);
+			{
+			{
+			setState(285);
+			((AdditiveContext)_localctx).multiplicative = multiplicative(0);
+			((AdditiveContext)_localctx).ast =  ((AdditiveContext)_localctx).multiplicative.ast;
+			}
+			_ctx.stop = _input.LT(-1);
+			setState(300);
+			_errHandler.sync(this);
+			_alt = getInterpreter().adaptivePredict(_input,17,_ctx);
+			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
+				if ( _alt==1 ) {
+					if ( _parseListeners!=null ) triggerExitRuleEvent();
+					_prevctx = _localctx;
+					{
+					setState(298);
+					_errHandler.sync(this);
+					switch ( getInterpreter().adaptivePredict(_input,16,_ctx) ) {
+					case 1:
+						{
+						_localctx = new AdditiveContext(_parentctx, _parentState);
+						_localctx.a = _prevctx;
+						pushNewRecursionContext(_localctx, _startState, RULE_additive);
+						setState(288);
+						if (!(precpred(_ctx, 3))) throw new FailedPredicateException(this, "precpred(_ctx, 3)");
+						setState(289);
+						match(PLUS);
+						setState(290);
+						((AdditiveContext)_localctx).multiplicative = multiplicative(0);
+
+						          		((AdditiveContext)_localctx).ast =  new AstBinExpr(loc(((AdditiveContext)_localctx).a.ast.location(), ((AdditiveContext)_localctx).multiplicative.ast.location()), AstBinExpr.Oper.ADD, ((AdditiveContext)_localctx).a.ast, ((AdditiveContext)_localctx).multiplicative.ast);
+						          	
+						}
+						break;
+					case 2:
+						{
+						_localctx = new AdditiveContext(_parentctx, _parentState);
+						_localctx.a = _prevctx;
+						pushNewRecursionContext(_localctx, _startState, RULE_additive);
+						setState(293);
+						if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
+						setState(294);
+						match(MINUS);
+						setState(295);
+						((AdditiveContext)_localctx).multiplicative = multiplicative(0);
+
+						          		((AdditiveContext)_localctx).ast =  new AstBinExpr(loc(((AdditiveContext)_localctx).a.ast.location(), ((AdditiveContext)_localctx).multiplicative.ast.location()), AstBinExpr.Oper.SUB, ((AdditiveContext)_localctx).a.ast, ((AdditiveContext)_localctx).multiplicative.ast);
+						          	
+						}
+						break;
+					}
+					} 
+				}
+				setState(302);
+				_errHandler.sync(this);
+				_alt = getInterpreter().adaptivePredict(_input,17,_ctx);
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			unrollRecursionContexts(_parentctx);
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class MultiplicativeContext extends ParserRuleContext {
+		public AstExpr ast;
+		public MultiplicativeContext m;
+		public PrefixContext prefix;
+		public PrefixContext prefix() {
+			return getRuleContext(PrefixContext.class,0);
+		}
+		public TerminalNode STAR() { return getToken(Lang24Parser.STAR, 0); }
+		public MultiplicativeContext multiplicative() {
+			return getRuleContext(MultiplicativeContext.class,0);
+		}
+		public TerminalNode DIV() { return getToken(Lang24Parser.DIV, 0); }
+		public TerminalNode MOD() { return getToken(Lang24Parser.MOD, 0); }
+		public MultiplicativeContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_multiplicative; }
+	}
+
+	public final MultiplicativeContext multiplicative() throws RecognitionException {
+		return multiplicative(0);
+	}
+
+	private MultiplicativeContext multiplicative(int _p) throws RecognitionException {
+		ParserRuleContext _parentctx = _ctx;
+		int _parentState = getState();
+		MultiplicativeContext _localctx = new MultiplicativeContext(_ctx, _parentState);
+		MultiplicativeContext _prevctx = _localctx;
+		int _startState = 34;
+		enterRecursionRule(_localctx, 34, RULE_multiplicative, _p);
+		try {
+			int _alt;
+			enterOuterAlt(_localctx, 1);
+			{
+			{
+			setState(304);
+			((MultiplicativeContext)_localctx).prefix = prefix();
+			((MultiplicativeContext)_localctx).ast =  ((MultiplicativeContext)_localctx).prefix.ast;
+			}
+			_ctx.stop = _input.LT(-1);
+			setState(324);
+			_errHandler.sync(this);
+			_alt = getInterpreter().adaptivePredict(_input,19,_ctx);
+			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
+				if ( _alt==1 ) {
+					if ( _parseListeners!=null ) triggerExitRuleEvent();
+					_prevctx = _localctx;
+					{
+					setState(322);
+					_errHandler.sync(this);
+					switch ( getInterpreter().adaptivePredict(_input,18,_ctx) ) {
+					case 1:
+						{
+						_localctx = new MultiplicativeContext(_parentctx, _parentState);
+						_localctx.m = _prevctx;
+						pushNewRecursionContext(_localctx, _startState, RULE_multiplicative);
+						setState(307);
+						if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
+						setState(308);
+						match(STAR);
+						setState(309);
+						((MultiplicativeContext)_localctx).prefix = prefix();
+						((MultiplicativeContext)_localctx).ast =  new AstBinExpr(loc(((MultiplicativeContext)_localctx).m.ast.location(), ((MultiplicativeContext)_localctx).prefix.ast.location()), AstBinExpr.Oper.MUL, ((MultiplicativeContext)_localctx).m.ast, ((MultiplicativeContext)_localctx).prefix.ast);
+						}
+						break;
+					case 2:
+						{
+						_localctx = new MultiplicativeContext(_parentctx, _parentState);
+						_localctx.m = _prevctx;
+						pushNewRecursionContext(_localctx, _startState, RULE_multiplicative);
+						setState(312);
+						if (!(precpred(_ctx, 3))) throw new FailedPredicateException(this, "precpred(_ctx, 3)");
+						setState(313);
+						match(DIV);
+						setState(314);
+						((MultiplicativeContext)_localctx).prefix = prefix();
+						((MultiplicativeContext)_localctx).ast =  new AstBinExpr(loc(((MultiplicativeContext)_localctx).m.ast.location(), ((MultiplicativeContext)_localctx).prefix.ast.location()), AstBinExpr.Oper.DIV, ((MultiplicativeContext)_localctx).m.ast, ((MultiplicativeContext)_localctx).prefix.ast);
+						}
+						break;
+					case 3:
+						{
+						_localctx = new MultiplicativeContext(_parentctx, _parentState);
+						_localctx.m = _prevctx;
+						pushNewRecursionContext(_localctx, _startState, RULE_multiplicative);
+						setState(317);
+						if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
+						setState(318);
+						match(MOD);
+						setState(319);
+						((MultiplicativeContext)_localctx).prefix = prefix();
+						((MultiplicativeContext)_localctx).ast =  new AstBinExpr(loc(((MultiplicativeContext)_localctx).m.ast.location(), ((MultiplicativeContext)_localctx).prefix.ast.location()), AstBinExpr.Oper.MOD, ((MultiplicativeContext)_localctx).m.ast, ((MultiplicativeContext)_localctx).prefix.ast);
+						}
+						break;
+					}
+					} 
+				}
+				setState(326);
+				_errHandler.sync(this);
+				_alt = getInterpreter().adaptivePredict(_input,19,_ctx);
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			unrollRecursionContexts(_parentctx);
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class PrefixContext extends ParserRuleContext {
+		public AstExpr ast;
+		public Token NOT;
+		public PrefixContext p;
+		public Token PLUS;
+		public Token MINUS;
+		public Token CARET;
+		public Token LESS;
+		public TypeContext type;
+		public PostfixContext postfix;
+		public TerminalNode NOT() { return getToken(Lang24Parser.NOT, 0); }
+		public PrefixContext prefix() {
+			return getRuleContext(PrefixContext.class,0);
+		}
+		public TerminalNode PLUS() { return getToken(Lang24Parser.PLUS, 0); }
+		public TerminalNode MINUS() { return getToken(Lang24Parser.MINUS, 0); }
+		public TerminalNode CARET() { return getToken(Lang24Parser.CARET, 0); }
+		public TerminalNode LESS() { return getToken(Lang24Parser.LESS, 0); }
+		public TypeContext type() {
+			return getRuleContext(TypeContext.class,0);
+		}
+		public TerminalNode GREATER() { return getToken(Lang24Parser.GREATER, 0); }
+		public PostfixContext postfix() {
+			return getRuleContext(PostfixContext.class,0);
+		}
+		public PrefixContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_prefix; }
+	}
+
+	public final PrefixContext prefix() throws RecognitionException {
+		PrefixContext _localctx = new PrefixContext(_ctx, getState());
+		enterRule(_localctx, 36, RULE_prefix);
+		try {
+			setState(352);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case NOT:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(327);
+				((PrefixContext)_localctx).NOT = match(NOT);
+				setState(328);
+				((PrefixContext)_localctx).p = prefix();
+				((PrefixContext)_localctx).ast =  new AstPfxExpr(loc(((PrefixContext)_localctx).NOT, ((PrefixContext)_localctx).p.ast.location()), AstPfxExpr.Oper.NOT, ((PrefixContext)_localctx).p.ast);
+				}
+				break;
+			case PLUS:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(331);
+				((PrefixContext)_localctx).PLUS = match(PLUS);
+				setState(332);
+				((PrefixContext)_localctx).p = prefix();
+				((PrefixContext)_localctx).ast =  new AstPfxExpr(loc(((PrefixContext)_localctx).PLUS, ((PrefixContext)_localctx).p.ast.location()), AstPfxExpr.Oper.ADD, ((PrefixContext)_localctx).p.ast);
+				}
+				break;
+			case MINUS:
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(335);
+				((PrefixContext)_localctx).MINUS = match(MINUS);
+				setState(336);
+				((PrefixContext)_localctx).p = prefix();
+				((PrefixContext)_localctx).ast =  new AstPfxExpr(loc(((PrefixContext)_localctx).MINUS, ((PrefixContext)_localctx).p.ast.location()), AstPfxExpr.Oper.SUB, ((PrefixContext)_localctx).p.ast);
+				}
+				break;
+			case CARET:
+				enterOuterAlt(_localctx, 4);
+				{
+				setState(339);
+				((PrefixContext)_localctx).CARET = match(CARET);
+				setState(340);
+				((PrefixContext)_localctx).p = prefix();
+				((PrefixContext)_localctx).ast =  new AstPfxExpr(loc(((PrefixContext)_localctx).CARET, ((PrefixContext)_localctx).p.ast.location()), AstPfxExpr.Oper.PTR, ((PrefixContext)_localctx).p.ast);
+				}
+				break;
+			case LESS:
+				enterOuterAlt(_localctx, 5);
+				{
+				setState(343);
+				((PrefixContext)_localctx).LESS = match(LESS);
+				setState(344);
+				((PrefixContext)_localctx).type = type();
+				setState(345);
+				match(GREATER);
+				setState(346);
+				((PrefixContext)_localctx).p = prefix();
+				((PrefixContext)_localctx).ast =  new AstCastExpr(loc(((PrefixContext)_localctx).LESS, ((PrefixContext)_localctx).p.ast.location()), ((PrefixContext)_localctx).type.ast, ((PrefixContext)_localctx).p.ast);
+				}
+				break;
+			case INTCONST:
+			case CHARCONST:
+			case STRINGCONST:
+			case LEFTPAREN:
+			case NIL:
+			case NONE:
+			case SIZEOF:
+			case TRUE:
+			case FALSE:
+			case IDENTIFIER:
+				enterOuterAlt(_localctx, 6);
+				{
+				setState(349);
+				((PrefixContext)_localctx).postfix = postfix(0);
+				((PrefixContext)_localctx).ast =  ((PrefixContext)_localctx).postfix.ast;
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+		}
+		catch (Exception e) {
+
+					Token token = getCurrentToken();
+					Locatable location = new Location(token.getLine(), token.getCharPositionInLine());
+					throw new Report.Error(location, "Syntax error at '" + token.getText() + "': Check your prefixes!");
+				
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class PostfixContext extends ParserRuleContext {
+		public AstExpr ast;
+		public PostfixContext p;
+		public SizeparenContext sizeparen;
+		public Token CARET;
+		public Token IDENTIFIER;
+		public ExpressionContext expression;
+		public Token RIGHTBRACKET;
+		public SizeparenContext sizeparen() {
+			return getRuleContext(SizeparenContext.class,0);
+		}
+		public TerminalNode CARET() { return getToken(Lang24Parser.CARET, 0); }
+		public PostfixContext postfix() {
+			return getRuleContext(PostfixContext.class,0);
+		}
+		public TerminalNode DOT() { return getToken(Lang24Parser.DOT, 0); }
+		public TerminalNode IDENTIFIER() { return getToken(Lang24Parser.IDENTIFIER, 0); }
+		public TerminalNode LEFTBRACKET() { return getToken(Lang24Parser.LEFTBRACKET, 0); }
+		public ExpressionContext expression() {
+			return getRuleContext(ExpressionContext.class,0);
+		}
+		public TerminalNode RIGHTBRACKET() { return getToken(Lang24Parser.RIGHTBRACKET, 0); }
+		public PostfixContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_postfix; }
+	}
+
+	public final PostfixContext postfix() throws RecognitionException {
+		return postfix(0);
+	}
+
+	private PostfixContext postfix(int _p) throws RecognitionException {
+		ParserRuleContext _parentctx = _ctx;
+		int _parentState = getState();
+		PostfixContext _localctx = new PostfixContext(_ctx, _parentState);
+		PostfixContext _prevctx = _localctx;
+		int _startState = 38;
+		enterRecursionRule(_localctx, 38, RULE_postfix, _p);
+		try {
+			int _alt;
+			enterOuterAlt(_localctx, 1);
+			{
+			{
+			setState(355);
+			((PostfixContext)_localctx).sizeparen = sizeparen();
+			((PostfixContext)_localctx).ast =  ((PostfixContext)_localctx).sizeparen.ast;
+			}
+			_ctx.stop = _input.LT(-1);
+			setState(373);
+			_errHandler.sync(this);
+			_alt = getInterpreter().adaptivePredict(_input,22,_ctx);
+			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
+				if ( _alt==1 ) {
+					if ( _parseListeners!=null ) triggerExitRuleEvent();
+					_prevctx = _localctx;
+					{
+					setState(371);
+					_errHandler.sync(this);
+					switch ( getInterpreter().adaptivePredict(_input,21,_ctx) ) {
+					case 1:
+						{
+						_localctx = new PostfixContext(_parentctx, _parentState);
+						_localctx.p = _prevctx;
+						pushNewRecursionContext(_localctx, _startState, RULE_postfix);
+						setState(358);
+						if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
+						setState(359);
+						((PostfixContext)_localctx).CARET = match(CARET);
+						((PostfixContext)_localctx).ast =  new AstSfxExpr(loc(((PostfixContext)_localctx).p.ast.location(), ((PostfixContext)_localctx).CARET), AstSfxExpr.Oper.PTR, ((PostfixContext)_localctx).p.ast);
+						}
+						break;
+					case 2:
+						{
+						_localctx = new PostfixContext(_parentctx, _parentState);
+						_localctx.p = _prevctx;
+						pushNewRecursionContext(_localctx, _startState, RULE_postfix);
+						setState(361);
+						if (!(precpred(_ctx, 3))) throw new FailedPredicateException(this, "precpred(_ctx, 3)");
+						setState(362);
+						match(DOT);
+						setState(363);
+						((PostfixContext)_localctx).IDENTIFIER = match(IDENTIFIER);
+						((PostfixContext)_localctx).ast =  new AstCmpExpr(loc(((PostfixContext)_localctx).p.ast.location(), ((PostfixContext)_localctx).IDENTIFIER), ((PostfixContext)_localctx).p.ast, (((PostfixContext)_localctx).IDENTIFIER!=null?((PostfixContext)_localctx).IDENTIFIER.getText():null));
+						}
+						break;
+					case 3:
+						{
+						_localctx = new PostfixContext(_parentctx, _parentState);
+						_localctx.p = _prevctx;
+						pushNewRecursionContext(_localctx, _startState, RULE_postfix);
+						setState(365);
+						if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
+						setState(366);
+						match(LEFTBRACKET);
+						setState(367);
+						((PostfixContext)_localctx).expression = expression(0);
+						setState(368);
+						((PostfixContext)_localctx).RIGHTBRACKET = match(RIGHTBRACKET);
+						((PostfixContext)_localctx).ast =  new AstArrExpr(loc(((PostfixContext)_localctx).p.ast.location(), ((PostfixContext)_localctx).RIGHTBRACKET), ((PostfixContext)_localctx).p.ast, ((PostfixContext)_localctx).expression.ast);
+						}
+						break;
+					}
+					} 
+				}
+				setState(375);
+				_errHandler.sync(this);
+				_alt = getInterpreter().adaptivePredict(_input,22,_ctx);
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			unrollRecursionContexts(_parentctx);
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class SizeparenContext extends ParserRuleContext {
+		public AstExpr ast;
+		public Token LEFTPAREN;
+		public ExpressionContext expression;
+		public Token RIGHTPAREN;
+		public Token SIZEOF;
+		public TypeContext type;
+		public TerminalContext terminal;
+		public TerminalNode LEFTPAREN() { return getToken(Lang24Parser.LEFTPAREN, 0); }
+		public ExpressionContext expression() {
+			return getRuleContext(ExpressionContext.class,0);
+		}
+		public TerminalNode RIGHTPAREN() { return getToken(Lang24Parser.RIGHTPAREN, 0); }
+		public TerminalNode SIZEOF() { return getToken(Lang24Parser.SIZEOF, 0); }
+		public TypeContext type() {
+			return getRuleContext(TypeContext.class,0);
+		}
+		public TerminalContext terminal() {
+			return getRuleContext(TerminalContext.class,0);
+		}
+		public SizeparenContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_sizeparen; }
+	}
+
+	public final SizeparenContext sizeparen() throws RecognitionException {
+		SizeparenContext _localctx = new SizeparenContext(_ctx, getState());
+		enterRule(_localctx, 40, RULE_sizeparen);
+		try {
+			setState(390);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case LEFTPAREN:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(376);
+				((SizeparenContext)_localctx).LEFTPAREN = match(LEFTPAREN);
+				setState(377);
+				((SizeparenContext)_localctx).expression = expression(0);
+				setState(378);
+				((SizeparenContext)_localctx).RIGHTPAREN = match(RIGHTPAREN);
+
+						((SizeparenContext)_localctx).expression.ast.relocate(loc(((SizeparenContext)_localctx).LEFTPAREN, ((SizeparenContext)_localctx).RIGHTPAREN));
+						((SizeparenContext)_localctx).ast =  ((SizeparenContext)_localctx).expression.ast;
+					
+				}
+				break;
+			case SIZEOF:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(381);
+				((SizeparenContext)_localctx).SIZEOF = match(SIZEOF);
+				setState(382);
+				match(LEFTPAREN);
+				setState(383);
+				((SizeparenContext)_localctx).type = type();
+				setState(384);
+				((SizeparenContext)_localctx).RIGHTPAREN = match(RIGHTPAREN);
+
+						((SizeparenContext)_localctx).ast =  new AstSizeofExpr(loc(((SizeparenContext)_localctx).SIZEOF, ((SizeparenContext)_localctx).RIGHTPAREN), ((SizeparenContext)_localctx).type.ast);
+					
+				}
+				break;
+			case INTCONST:
+			case CHARCONST:
+			case STRINGCONST:
+			case NIL:
+			case NONE:
+			case TRUE:
+			case FALSE:
+			case IDENTIFIER:
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(387);
+				((SizeparenContext)_localctx).terminal = terminal();
+				((SizeparenContext)_localctx).ast =  ((SizeparenContext)_localctx).terminal.ast;
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+		}
+		catch (Exception e) {
+
+					Token token = getCurrentToken();
+					Locatable location = new Location(token.getLine(), token.getCharPositionInLine());
+					throw new Report.Error(location, "Syntax error at '" + token.getText() + "': Check SIZEOF and parentheses!");
+				
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class TerminalContext extends ParserRuleContext {
+		public AstExpr ast;
+		public Token NONE;
+		public Token TRUE;
+		public Token FALSE;
+		public Token CHARCONST;
+		public Token INTCONST;
+		public Token STRINGCONST;
+		public Token NIL;
+		public Token IDENTIFIER;
+		public Token RIGHTPAREN;
+		public ExpressionsContext expressions;
+		public TerminalNode NONE() { return getToken(Lang24Parser.NONE, 0); }
+		public TerminalNode TRUE() { return getToken(Lang24Parser.TRUE, 0); }
+		public TerminalNode FALSE() { return getToken(Lang24Parser.FALSE, 0); }
+		public TerminalNode CHARCONST() { return getToken(Lang24Parser.CHARCONST, 0); }
+		public TerminalNode INTCONST() { return getToken(Lang24Parser.INTCONST, 0); }
+		public TerminalNode STRINGCONST() { return getToken(Lang24Parser.STRINGCONST, 0); }
+		public TerminalNode NIL() { return getToken(Lang24Parser.NIL, 0); }
+		public TerminalNode IDENTIFIER() { return getToken(Lang24Parser.IDENTIFIER, 0); }
+		public TerminalNode LEFTPAREN() { return getToken(Lang24Parser.LEFTPAREN, 0); }
+		public TerminalNode RIGHTPAREN() { return getToken(Lang24Parser.RIGHTPAREN, 0); }
+		public ExpressionsContext expressions() {
+			return getRuleContext(ExpressionsContext.class,0);
+		}
+		public TerminalContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_terminal; }
+	}
+
+	public final TerminalContext terminal() throws RecognitionException {
+		TerminalContext _localctx = new TerminalContext(_ctx, getState());
+		enterRule(_localctx, 42, RULE_terminal);
+		try {
+			setState(418);
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,24,_ctx) ) {
+			case 1:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(392);
+				((TerminalContext)_localctx).NONE = match(NONE);
+				((TerminalContext)_localctx).ast =  new AstAtomExpr(loc(((TerminalContext)_localctx).NONE), AstAtomExpr.Type.VOID, (((TerminalContext)_localctx).NONE!=null?((TerminalContext)_localctx).NONE.getText():null));
+				}
+				break;
+			case 2:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(394);
+				((TerminalContext)_localctx).TRUE = match(TRUE);
+				((TerminalContext)_localctx).ast =  new AstAtomExpr(loc(((TerminalContext)_localctx).TRUE), AstAtomExpr.Type.BOOL, (((TerminalContext)_localctx).TRUE!=null?((TerminalContext)_localctx).TRUE.getText():null));
+				}
+				break;
+			case 3:
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(396);
+				((TerminalContext)_localctx).FALSE = match(FALSE);
+				((TerminalContext)_localctx).ast =  new AstAtomExpr(loc(((TerminalContext)_localctx).FALSE), AstAtomExpr.Type.BOOL, (((TerminalContext)_localctx).FALSE!=null?((TerminalContext)_localctx).FALSE.getText():null));
+				}
+				break;
+			case 4:
+				enterOuterAlt(_localctx, 4);
+				{
+				setState(398);
+				((TerminalContext)_localctx).CHARCONST = match(CHARCONST);
+				((TerminalContext)_localctx).ast =  new AstAtomExpr(loc(((TerminalContext)_localctx).CHARCONST), AstAtomExpr.Type.CHAR, (((TerminalContext)_localctx).CHARCONST!=null?((TerminalContext)_localctx).CHARCONST.getText():null));
+				}
+				break;
+			case 5:
+				enterOuterAlt(_localctx, 5);
+				{
+				setState(400);
+				((TerminalContext)_localctx).INTCONST = match(INTCONST);
+				((TerminalContext)_localctx).ast =  new AstAtomExpr(loc(((TerminalContext)_localctx).INTCONST), AstAtomExpr.Type.INT, (((TerminalContext)_localctx).INTCONST!=null?((TerminalContext)_localctx).INTCONST.getText():null));
+				}
+				break;
+			case 6:
+				enterOuterAlt(_localctx, 6);
+				{
+				setState(402);
+				((TerminalContext)_localctx).STRINGCONST = match(STRINGCONST);
+				((TerminalContext)_localctx).ast =  new AstAtomExpr(loc(((TerminalContext)_localctx).STRINGCONST), AstAtomExpr.Type.STR, (((TerminalContext)_localctx).STRINGCONST!=null?((TerminalContext)_localctx).STRINGCONST.getText():null));
+				}
+				break;
+			case 7:
+				enterOuterAlt(_localctx, 7);
+				{
+				setState(404);
+				((TerminalContext)_localctx).NIL = match(NIL);
+				((TerminalContext)_localctx).ast =  new AstAtomExpr(loc(((TerminalContext)_localctx).NIL), AstAtomExpr.Type.PTR, (((TerminalContext)_localctx).NIL!=null?((TerminalContext)_localctx).NIL.getText():null));
+				}
+				break;
+			case 8:
+				enterOuterAlt(_localctx, 8);
+				{
+				setState(406);
+				((TerminalContext)_localctx).IDENTIFIER = match(IDENTIFIER);
+				((TerminalContext)_localctx).ast =  new AstNameExpr(loc(((TerminalContext)_localctx).IDENTIFIER), (((TerminalContext)_localctx).IDENTIFIER!=null?((TerminalContext)_localctx).IDENTIFIER.getText():null));
+				}
+				break;
+			case 9:
+				enterOuterAlt(_localctx, 9);
+				{
+				setState(408);
+				((TerminalContext)_localctx).IDENTIFIER = match(IDENTIFIER);
+				setState(409);
+				match(LEFTPAREN);
+				setState(410);
+				((TerminalContext)_localctx).RIGHTPAREN = match(RIGHTPAREN);
+
+						((TerminalContext)_localctx).ast =  new AstCallExpr(loc(((TerminalContext)_localctx).IDENTIFIER, ((TerminalContext)_localctx).RIGHTPAREN), (((TerminalContext)_localctx).IDENTIFIER!=null?((TerminalContext)_localctx).IDENTIFIER.getText():null), null);
+					
+				}
+				break;
+			case 10:
+				enterOuterAlt(_localctx, 10);
+				{
+				setState(412);
+				((TerminalContext)_localctx).IDENTIFIER = match(IDENTIFIER);
+				setState(413);
+				match(LEFTPAREN);
+				setState(414);
+				((TerminalContext)_localctx).expressions = expressions();
+				setState(415);
+				((TerminalContext)_localctx).RIGHTPAREN = match(RIGHTPAREN);
+
+						((TerminalContext)_localctx).ast =  new AstCallExpr(loc(((TerminalContext)_localctx).IDENTIFIER, ((TerminalContext)_localctx).RIGHTPAREN), (((TerminalContext)_localctx).IDENTIFIER!=null?((TerminalContext)_localctx).IDENTIFIER.getText():null), new AstNodes<AstExpr>(((TerminalContext)_localctx).expressions.list));
+					
+				}
+				break;
+			}
+		}
+		catch (Exception e) {
+
+					Token token = getCurrentToken();
+					Locatable location = new Location(token.getLine(), token.getCharPositionInLine());
+					throw new Report.Error(location, "Syntax error at '" + token.getText() + "': Check your constants!");
+				
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class ExpressionsContext extends ParserRuleContext {
+		public List list;
+		public ExpressionContext expression;
+		public ExpressionsContext e;
+		public ExpressionContext expression() {
+			return getRuleContext(ExpressionContext.class,0);
+		}
+		public TerminalNode COMMA() { return getToken(Lang24Parser.COMMA, 0); }
+		public ExpressionsContext expressions() {
+			return getRuleContext(ExpressionsContext.class,0);
+		}
+		public ExpressionsContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_expressions; }
+	}
+
+	public final ExpressionsContext expressions() throws RecognitionException {
+		ExpressionsContext _localctx = new ExpressionsContext(_ctx, getState());
+		enterRule(_localctx, 44, RULE_expressions);
+		((ExpressionsContext)_localctx).list =  new ArrayList<AstExpr>();
+		try {
+			setState(428);
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,25,_ctx) ) {
+			case 1:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(420);
+				((ExpressionsContext)_localctx).expression = expression(0);
+				_localctx.list.add(((ExpressionsContext)_localctx).expression.ast);
+				}
+				break;
+			case 2:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(423);
+				((ExpressionsContext)_localctx).expression = expression(0);
+				setState(424);
+				match(COMMA);
+				setState(425);
+				((ExpressionsContext)_localctx).e = expressions();
+				_localctx.list.add(((ExpressionsContext)_localctx).expression.ast); _localctx.list.addAll(((ExpressionsContext)_localctx).e.list);
+				}
+				break;
+			}
+		}
+		catch (Exception e) {
+
+					Token token = getCurrentToken();
+					Locatable location = new Location(token.getLine(), token.getCharPositionInLine());
+					throw new Report.Error(location, "Syntax error at '" + token.getText() + "': Check your expressions!");
+				
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public boolean sempred(RuleContext _localctx, int ruleIndex, int predIndex) {
+		switch (ruleIndex) {
+		case 13:
+			return expression_sempred((ExpressionContext)_localctx, predIndex);
+		case 14:
+			return conjunctive_sempred((ConjunctiveContext)_localctx, predIndex);
+		case 15:
+			return relational_sempred((RelationalContext)_localctx, predIndex);
+		case 16:
+			return additive_sempred((AdditiveContext)_localctx, predIndex);
+		case 17:
+			return multiplicative_sempred((MultiplicativeContext)_localctx, predIndex);
+		case 19:
+			return postfix_sempred((PostfixContext)_localctx, predIndex);
+		}
+		return true;
+	}
+	private boolean expression_sempred(ExpressionContext _localctx, int predIndex) {
+		switch (predIndex) {
+		case 0:
+			return precpred(_ctx, 2);
+		}
+		return true;
+	}
+	private boolean conjunctive_sempred(ConjunctiveContext _localctx, int predIndex) {
+		switch (predIndex) {
+		case 1:
+			return precpred(_ctx, 2);
+		}
+		return true;
+	}
+	private boolean relational_sempred(RelationalContext _localctx, int predIndex) {
+		switch (predIndex) {
+		case 2:
+			return precpred(_ctx, 7);
+		case 3:
+			return precpred(_ctx, 6);
+		case 4:
+			return precpred(_ctx, 5);
+		case 5:
+			return precpred(_ctx, 4);
+		case 6:
+			return precpred(_ctx, 3);
+		case 7:
+			return precpred(_ctx, 2);
+		}
+		return true;
+	}
+	private boolean additive_sempred(AdditiveContext _localctx, int predIndex) {
+		switch (predIndex) {
+		case 8:
+			return precpred(_ctx, 3);
+		case 9:
+			return precpred(_ctx, 2);
+		}
+		return true;
+	}
+	private boolean multiplicative_sempred(MultiplicativeContext _localctx, int predIndex) {
+		switch (predIndex) {
+		case 10:
+			return precpred(_ctx, 4);
+		case 11:
+			return precpred(_ctx, 3);
+		case 12:
+			return precpred(_ctx, 2);
+		}
+		return true;
+	}
+	private boolean postfix_sempred(PostfixContext _localctx, int predIndex) {
+		switch (predIndex) {
+		case 13:
+			return precpred(_ctx, 4);
+		case 14:
+			return precpred(_ctx, 3);
+		case 15:
+			return precpred(_ctx, 2);
+		}
+		return true;
+	}
+
+	public static final String _serializedATN =
+		"\u0004\u00010\u01af\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
+		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007\u0002"+
+		"\b\u0007\b\u0002\t\u0007\t\u0002\n\u0007\n\u0002\u000b\u0007\u000b\u0002"+
+		"\f\u0007\f\u0002\r\u0007\r\u0002\u000e\u0007\u000e\u0002\u000f\u0007\u000f"+
+		"\u0002\u0010\u0007\u0010\u0002\u0011\u0007\u0011\u0002\u0012\u0007\u0012"+
+		"\u0002\u0013\u0007\u0013\u0002\u0014\u0007\u0014\u0002\u0015\u0007\u0015"+
+		"\u0002\u0016\u0007\u0016\u0001\u0000\u0001\u0000\u0001\u0000\u0001\u0000"+
+		"\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001"+
+		"\u0001\u0001\u0003\u0001:\b\u0001\u0001\u0002\u0001\u0002\u0001\u0002"+
+		"\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002"+
+		"\u0003\u0002E\b\u0002\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003"+
+		"\u0001\u0003\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004"+
+		"\u0001\u0005\u0001\u0005\u0001\u0005\u0003\u0005T\b\u0005\u0001\u0005"+
+		"\u0001\u0005\u0001\u0005\u0001\u0005\u0001\u0005\u0001\u0005\u0001\u0005"+
+		"\u0001\u0005\u0001\u0005\u0003\u0005_\b\u0005\u0003\u0005a\b\u0005\u0001"+
+		"\u0005\u0001\u0005\u0001\u0006\u0001\u0006\u0001\u0006\u0001\u0006\u0001"+
+		"\u0006\u0001\u0006\u0001\u0006\u0001\u0006\u0003\u0006m\b\u0006\u0001"+
+		"\u0007\u0001\u0007\u0001\u0007\u0001\u0007\u0001\u0007\u0001\u0007\u0001"+
+		"\u0007\u0001\u0007\u0001\u0007\u0001\u0007\u0001\u0007\u0003\u0007z\b"+
+		"\u0007\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b"+
+		"\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0003"+
+		"\b\u008c\b\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001"+
+		"\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001"+
+		"\b\u0001\b\u0003\b\u00a0\b\b\u0001\t\u0001\t\u0001\t\u0001\t\u0001\t\u0001"+
+		"\t\u0001\t\u0003\t\u00a9\b\t\u0001\n\u0001\n\u0001\n\u0001\n\u0001\n\u0001"+
+		"\n\u0001\n\u0001\n\u0001\n\u0001\n\u0001\n\u0001\n\u0001\n\u0001\n\u0001"+
+		"\n\u0001\n\u0001\n\u0001\n\u0001\n\u0001\n\u0001\n\u0001\n\u0001\n\u0001"+
+		"\n\u0001\n\u0001\n\u0001\n\u0001\n\u0001\n\u0001\n\u0003\n\u00c9\b\n\u0001"+
+		"\u000b\u0001\u000b\u0001\u000b\u0001\u000b\u0001\u000b\u0001\u000b\u0001"+
+		"\u000b\u0001\u000b\u0003\u000b\u00d3\b\u000b\u0001\f\u0001\f\u0001\f\u0001"+
+		"\f\u0001\f\u0001\r\u0001\r\u0001\r\u0001\r\u0001\r\u0001\r\u0001\r\u0001"+
+		"\r\u0001\r\u0005\r\u00e3\b\r\n\r\f\r\u00e6\t\r\u0001\u000e\u0001\u000e"+
+		"\u0001\u000e\u0001\u000e\u0001\u000e\u0001\u000e\u0001\u000e\u0001\u000e"+
+		"\u0001\u000e\u0005\u000e\u00f1\b\u000e\n\u000e\f\u000e\u00f4\t\u000e\u0001"+
+		"\u000f\u0001\u000f\u0001\u000f\u0001\u000f\u0001\u000f\u0001\u000f\u0001"+
+		"\u000f\u0001\u000f\u0001\u000f\u0001\u000f\u0001\u000f\u0001\u000f\u0001"+
+		"\u000f\u0001\u000f\u0001\u000f\u0001\u000f\u0001\u000f\u0001\u000f\u0001"+
+		"\u000f\u0001\u000f\u0001\u000f\u0001\u000f\u0001\u000f\u0001\u000f\u0001"+
+		"\u000f\u0001\u000f\u0001\u000f\u0001\u000f\u0001\u000f\u0001\u000f\u0001"+
+		"\u000f\u0001\u000f\u0001\u000f\u0001\u000f\u0005\u000f\u0118\b\u000f\n"+
+		"\u000f\f\u000f\u011b\t\u000f\u0001\u0010\u0001\u0010\u0001\u0010\u0001"+
+		"\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0001"+
+		"\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0005\u0010\u012b"+
+		"\b\u0010\n\u0010\f\u0010\u012e\t\u0010\u0001\u0011\u0001\u0011\u0001\u0011"+
+		"\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011"+
+		"\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011"+
+		"\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0005\u0011\u0143\b\u0011"+
+		"\n\u0011\f\u0011\u0146\t\u0011\u0001\u0012\u0001\u0012\u0001\u0012\u0001"+
+		"\u0012\u0001\u0012\u0001\u0012\u0001\u0012\u0001\u0012\u0001\u0012\u0001"+
+		"\u0012\u0001\u0012\u0001\u0012\u0001\u0012\u0001\u0012\u0001\u0012\u0001"+
+		"\u0012\u0001\u0012\u0001\u0012\u0001\u0012\u0001\u0012\u0001\u0012\u0001"+
+		"\u0012\u0001\u0012\u0001\u0012\u0001\u0012\u0003\u0012\u0161\b\u0012\u0001"+
+		"\u0013\u0001\u0013\u0001\u0013\u0001\u0013\u0001\u0013\u0001\u0013\u0001"+
+		"\u0013\u0001\u0013\u0001\u0013\u0001\u0013\u0001\u0013\u0001\u0013\u0001"+
+		"\u0013\u0001\u0013\u0001\u0013\u0001\u0013\u0001\u0013\u0005\u0013\u0174"+
+		"\b\u0013\n\u0013\f\u0013\u0177\t\u0013\u0001\u0014\u0001\u0014\u0001\u0014"+
+		"\u0001\u0014\u0001\u0014\u0001\u0014\u0001\u0014\u0001\u0014\u0001\u0014"+
+		"\u0001\u0014\u0001\u0014\u0001\u0014\u0001\u0014\u0001\u0014\u0003\u0014"+
+		"\u0187\b\u0014\u0001\u0015\u0001\u0015\u0001\u0015\u0001\u0015\u0001\u0015"+
+		"\u0001\u0015\u0001\u0015\u0001\u0015\u0001\u0015\u0001\u0015\u0001\u0015"+
+		"\u0001\u0015\u0001\u0015\u0001\u0015\u0001\u0015\u0001\u0015\u0001\u0015"+
+		"\u0001\u0015\u0001\u0015\u0001\u0015\u0001\u0015\u0001\u0015\u0001\u0015"+
+		"\u0001\u0015\u0001\u0015\u0001\u0015\u0003\u0015\u01a3\b\u0015\u0001\u0016"+
+		"\u0001\u0016\u0001\u0016\u0001\u0016\u0001\u0016\u0001\u0016\u0001\u0016"+
+		"\u0001\u0016\u0003\u0016\u01ad\b\u0016\u0001\u0016\u0000\u0006\u001a\u001c"+
+		"\u001e \"&\u0017\u0000\u0002\u0004\u0006\b\n\f\u000e\u0010\u0012\u0014"+
+		"\u0016\u0018\u001a\u001c\u001e \"$&(*,\u0000\u0000\u01d0\u0000.\u0001"+
+		"\u0000\u0000\u0000\u00029\u0001\u0000\u0000\u0000\u0004D\u0001\u0000\u0000"+
+		"\u0000\u0006F\u0001\u0000\u0000\u0000\bK\u0001\u0000\u0000\u0000\nP\u0001"+
+		"\u0000\u0000\u0000\fl\u0001\u0000\u0000\u0000\u000ey\u0001\u0000\u0000"+
+		"\u0000\u0010\u009f\u0001\u0000\u0000\u0000\u0012\u00a8\u0001\u0000\u0000"+
+		"\u0000\u0014\u00c8\u0001\u0000\u0000\u0000\u0016\u00d2\u0001\u0000\u0000"+
+		"\u0000\u0018\u00d4\u0001\u0000\u0000\u0000\u001a\u00d9\u0001\u0000\u0000"+
+		"\u0000\u001c\u00e7\u0001\u0000\u0000\u0000\u001e\u00f5\u0001\u0000\u0000"+
+		"\u0000 \u011c\u0001\u0000\u0000\u0000\"\u012f\u0001\u0000\u0000\u0000"+
+		"$\u0160\u0001\u0000\u0000\u0000&\u0162\u0001\u0000\u0000\u0000(\u0186"+
+		"\u0001\u0000\u0000\u0000*\u01a2\u0001\u0000\u0000\u0000,\u01ac\u0001\u0000"+
+		"\u0000\u0000./\u0003\u0002\u0001\u0000/0\u0005\u0000\u0000\u000101\u0006"+
+		"\u0000\uffff\uffff\u00001\u0001\u0001\u0000\u0000\u000023\u0003\u0004"+
+		"\u0002\u000034\u0006\u0001\uffff\uffff\u00004:\u0001\u0000\u0000\u0000"+
+		"56\u0003\u0004\u0002\u000067\u0003\u0002\u0001\u000078\u0006\u0001\uffff"+
+		"\uffff\u00008:\u0001\u0000\u0000\u000092\u0001\u0000\u0000\u000095\u0001"+
+		"\u0000\u0000\u0000:\u0003\u0001\u0000\u0000\u0000;<\u0003\u0006\u0003"+
+		"\u0000<=\u0006\u0002\uffff\uffff\u0000=E\u0001\u0000\u0000\u0000>?\u0003"+
+		"\b\u0004\u0000?@\u0006\u0002\uffff\uffff\u0000@E\u0001\u0000\u0000\u0000"+
+		"AB\u0003\n\u0005\u0000BC\u0006\u0002\uffff\uffff\u0000CE\u0001\u0000\u0000"+
+		"\u0000D;\u0001\u0000\u0000\u0000D>\u0001\u0000\u0000\u0000DA\u0001\u0000"+
+		"\u0000\u0000E\u0005\u0001\u0000\u0000\u0000FG\u0005,\u0000\u0000GH\u0005"+
+		"\u001a\u0000\u0000HI\u0003\u0014\n\u0000IJ\u0006\u0003\uffff\uffff\u0000"+
+		"J\u0007\u0001\u0000\u0000\u0000KL\u0005,\u0000\u0000LM\u0005\f\u0000\u0000"+
+		"MN\u0003\u0014\n\u0000NO\u0006\u0004\uffff\uffff\u0000O\t\u0001\u0000"+
+		"\u0000\u0000PQ\u0005,\u0000\u0000QS\u0005\u0004\u0000\u0000RT\u0003\f"+
+		"\u0006\u0000SR\u0001\u0000\u0000\u0000ST\u0001\u0000\u0000\u0000TU\u0001"+
+		"\u0000\u0000\u0000UV\u0005\u0005\u0000\u0000VW\u0005\f\u0000\u0000W`\u0003"+
+		"\u0014\n\u0000XY\u0005\u001a\u0000\u0000Y^\u0003\u0010\b\u0000Z[\u0005"+
+		"\u0006\u0000\u0000[\\\u0003\u0002\u0001\u0000\\]\u0005\u0007\u0000\u0000"+
+		"]_\u0001\u0000\u0000\u0000^Z\u0001\u0000\u0000\u0000^_\u0001\u0000\u0000"+
+		"\u0000_a\u0001\u0000\u0000\u0000`X\u0001\u0000\u0000\u0000`a\u0001\u0000"+
+		"\u0000\u0000ab\u0001\u0000\u0000\u0000bc\u0006\u0005\uffff\uffff\u0000"+
+		"c\u000b\u0001\u0000\u0000\u0000de\u0003\u000e\u0007\u0000ef\u0005\u000b"+
+		"\u0000\u0000fg\u0003\f\u0006\u0000gh\u0006\u0006\uffff\uffff\u0000hm\u0001"+
+		"\u0000\u0000\u0000ij\u0003\u000e\u0007\u0000jk\u0006\u0006\uffff\uffff"+
+		"\u0000km\u0001\u0000\u0000\u0000ld\u0001\u0000\u0000\u0000li\u0001\u0000"+
+		"\u0000\u0000m\r\u0001\u0000\u0000\u0000no\u0005\u0019\u0000\u0000op\u0005"+
+		",\u0000\u0000pq\u0005\f\u0000\u0000qr\u0003\u0014\n\u0000rs\u0006\u0007"+
+		"\uffff\uffff\u0000sz\u0001\u0000\u0000\u0000tu\u0005,\u0000\u0000uv\u0005"+
+		"\f\u0000\u0000vw\u0003\u0014\n\u0000wx\u0006\u0007\uffff\uffff\u0000x"+
+		"z\u0001\u0000\u0000\u0000yn\u0001\u0000\u0000\u0000yt\u0001\u0000\u0000"+
+		"\u0000z\u000f\u0001\u0000\u0000\u0000{|\u0003\u001a\r\u0000|}\u0005\r"+
+		"\u0000\u0000}~\u0006\b\uffff\uffff\u0000~\u00a0\u0001\u0000\u0000\u0000"+
+		"\u007f\u0080\u0003\u001a\r\u0000\u0080\u0081\u0005\u001a\u0000\u0000\u0081"+
+		"\u0082\u0003\u001a\r\u0000\u0082\u0083\u0005\r\u0000\u0000\u0083\u0084"+
+		"\u0006\b\uffff\uffff\u0000\u0084\u00a0\u0001\u0000\u0000\u0000\u0085\u0086"+
+		"\u0005\u001f\u0000\u0000\u0086\u0087\u0003\u001a\r\u0000\u0087\u0088\u0005"+
+		"&\u0000\u0000\u0088\u008b\u0003\u0010\b\u0000\u0089\u008a\u0005\u001e"+
+		"\u0000\u0000\u008a\u008c\u0003\u0010\b\u0000\u008b\u0089\u0001\u0000\u0000"+
+		"\u0000\u008b\u008c\u0001\u0000\u0000\u0000\u008c\u008d\u0001\u0000\u0000"+
+		"\u0000\u008d\u008e\u0006\b\uffff\uffff\u0000\u008e\u00a0\u0001\u0000\u0000"+
+		"\u0000\u008f\u0090\u0005)\u0000\u0000\u0090\u0091\u0003\u001a\r\u0000"+
+		"\u0091\u0092\u0005\f\u0000\u0000\u0092\u0093\u0003\u0010\b\u0000\u0093"+
+		"\u0094\u0006\b\uffff\uffff\u0000\u0094\u00a0\u0001\u0000\u0000\u0000\u0095"+
+		"\u0096\u0005\'\u0000\u0000\u0096\u0097\u0003\u001a\r\u0000\u0097\u0098"+
+		"\u0005\r\u0000\u0000\u0098\u0099\u0006\b\uffff\uffff\u0000\u0099\u00a0"+
+		"\u0001\u0000\u0000\u0000\u009a\u009b\u0005\u0006\u0000\u0000\u009b\u009c"+
+		"\u0003\u0012\t\u0000\u009c\u009d\u0005\u0007\u0000\u0000\u009d\u009e\u0006"+
+		"\b\uffff\uffff\u0000\u009e\u00a0\u0001\u0000\u0000\u0000\u009f{\u0001"+
+		"\u0000\u0000\u0000\u009f\u007f\u0001\u0000\u0000\u0000\u009f\u0085\u0001"+
+		"\u0000\u0000\u0000\u009f\u008f\u0001\u0000\u0000\u0000\u009f\u0095\u0001"+
+		"\u0000\u0000\u0000\u009f\u009a\u0001\u0000\u0000\u0000\u00a0\u0011\u0001"+
+		"\u0000\u0000\u0000\u00a1\u00a2\u0003\u0010\b\u0000\u00a2\u00a3\u0006\t"+
+		"\uffff\uffff\u0000\u00a3\u00a9\u0001\u0000\u0000\u0000\u00a4\u00a5\u0003"+
+		"\u0010\b\u0000\u00a5\u00a6\u0003\u0012\t\u0000\u00a6\u00a7\u0006\t\uffff"+
+		"\uffff\u0000\u00a7\u00a9\u0001\u0000\u0000\u0000\u00a8\u00a1\u0001\u0000"+
+		"\u0000\u0000\u00a8\u00a4\u0001\u0000\u0000\u0000\u00a9\u0013\u0001\u0000"+
+		"\u0000\u0000\u00aa\u00ab\u0005(\u0000\u0000\u00ab\u00c9\u0006\n\uffff"+
+		"\uffff\u0000\u00ac\u00ad\u0005\u001c\u0000\u0000\u00ad\u00c9\u0006\n\uffff"+
+		"\uffff\u0000\u00ae\u00af\u0005\u001d\u0000\u0000\u00af\u00c9\u0006\n\uffff"+
+		"\uffff\u0000\u00b0\u00b1\u0005 \u0000\u0000\u00b1\u00c9\u0006\n\uffff"+
+		"\uffff\u0000\u00b2\u00b3\u0005\b\u0000\u0000\u00b3\u00b4\u0005\u0001\u0000"+
+		"\u0000\u00b4\u00b5\u0005\t\u0000\u0000\u00b5\u00b6\u0003\u0014\n\u0000"+
+		"\u00b6\u00b7\u0006\n\uffff\uffff\u0000\u00b7\u00c9\u0001\u0000\u0000\u0000"+
+		"\u00b8\u00b9\u0005\u0019\u0000\u0000\u00b9\u00ba\u0003\u0014\n\u0000\u00ba"+
+		"\u00bb\u0006\n\uffff\uffff\u0000\u00bb\u00c9\u0001\u0000\u0000\u0000\u00bc"+
+		"\u00bd\u0005\u0004\u0000\u0000\u00bd\u00be\u0003\u0016\u000b\u0000\u00be"+
+		"\u00bf\u0005\u0005\u0000\u0000\u00bf\u00c0\u0006\n\uffff\uffff\u0000\u00c0"+
+		"\u00c9\u0001\u0000\u0000\u0000\u00c1\u00c2\u0005\u0006\u0000\u0000\u00c2"+
+		"\u00c3\u0003\u0016\u000b\u0000\u00c3\u00c4\u0005\u0007\u0000\u0000\u00c4"+
+		"\u00c5\u0006\n\uffff\uffff\u0000\u00c5\u00c9\u0001\u0000\u0000\u0000\u00c6"+
+		"\u00c7\u0005,\u0000\u0000\u00c7\u00c9\u0006\n\uffff\uffff\u0000\u00c8"+
+		"\u00aa\u0001\u0000\u0000\u0000\u00c8\u00ac\u0001\u0000\u0000\u0000\u00c8"+
+		"\u00ae\u0001\u0000\u0000\u0000\u00c8\u00b0\u0001\u0000\u0000\u0000\u00c8"+
+		"\u00b2\u0001\u0000\u0000\u0000\u00c8\u00b8\u0001\u0000\u0000\u0000\u00c8"+
+		"\u00bc\u0001\u0000\u0000\u0000\u00c8\u00c1\u0001\u0000\u0000\u0000\u00c8"+
+		"\u00c6\u0001\u0000\u0000\u0000\u00c9\u0015\u0001\u0000\u0000\u0000\u00ca"+
+		"\u00cb\u0003\u0018\f\u0000\u00cb\u00cc\u0006\u000b\uffff\uffff\u0000\u00cc"+
+		"\u00d3\u0001\u0000\u0000\u0000\u00cd\u00ce\u0003\u0018\f\u0000\u00ce\u00cf"+
+		"\u0005\u000b\u0000\u0000\u00cf\u00d0\u0003\u0016\u000b\u0000\u00d0\u00d1"+
+		"\u0006\u000b\uffff\uffff\u0000\u00d1\u00d3\u0001\u0000\u0000\u0000\u00d2"+
+		"\u00ca\u0001\u0000\u0000\u0000\u00d2\u00cd\u0001\u0000\u0000\u0000\u00d3"+
+		"\u0017\u0001\u0000\u0000\u0000\u00d4\u00d5\u0005,\u0000\u0000\u00d5\u00d6"+
+		"\u0005\f\u0000\u0000\u00d6\u00d7\u0003\u0014\n\u0000\u00d7\u00d8\u0006"+
+		"\f\uffff\uffff\u0000\u00d8\u0019\u0001\u0000\u0000\u0000\u00d9\u00da\u0006"+
+		"\r\uffff\uffff\u0000\u00da\u00db\u0003\u001c\u000e\u0000\u00db\u00dc\u0006"+
+		"\r\uffff\uffff\u0000\u00dc\u00e4\u0001\u0000\u0000\u0000\u00dd\u00de\n"+
+		"\u0002\u0000\u0000\u00de\u00df\u0005$\u0000\u0000\u00df\u00e0\u0003\u001c"+
+		"\u000e\u0000\u00e0\u00e1\u0006\r\uffff\uffff\u0000\u00e1\u00e3\u0001\u0000"+
+		"\u0000\u0000\u00e2\u00dd\u0001\u0000\u0000\u0000\u00e3\u00e6\u0001\u0000"+
+		"\u0000\u0000\u00e4\u00e2\u0001\u0000\u0000\u0000\u00e4\u00e5\u0001\u0000"+
+		"\u0000\u0000\u00e5\u001b\u0001\u0000\u0000\u0000\u00e6\u00e4\u0001\u0000"+
+		"\u0000\u0000\u00e7\u00e8\u0006\u000e\uffff\uffff\u0000\u00e8\u00e9\u0003"+
+		"\u001e\u000f\u0000\u00e9\u00ea\u0006\u000e\uffff\uffff\u0000\u00ea\u00f2"+
+		"\u0001\u0000\u0000\u0000\u00eb\u00ec\n\u0002\u0000\u0000\u00ec\u00ed\u0005"+
+		"\u001b\u0000\u0000\u00ed\u00ee\u0003\u001e\u000f\u0000\u00ee\u00ef\u0006"+
+		"\u000e\uffff\uffff\u0000\u00ef\u00f1\u0001\u0000\u0000\u0000\u00f0\u00eb"+
+		"\u0001\u0000\u0000\u0000\u00f1\u00f4\u0001\u0000\u0000\u0000\u00f2\u00f0"+
+		"\u0001\u0000\u0000\u0000\u00f2\u00f3\u0001\u0000\u0000\u0000\u00f3\u001d"+
+		"\u0001\u0000\u0000\u0000\u00f4\u00f2\u0001\u0000\u0000\u0000\u00f5\u00f6"+
+		"\u0006\u000f\uffff\uffff\u0000\u00f6\u00f7\u0003 \u0010\u0000\u00f7\u00f8"+
+		"\u0006\u000f\uffff\uffff\u0000\u00f8\u0119\u0001\u0000\u0000\u0000\u00f9"+
+		"\u00fa\n\u0007\u0000\u0000\u00fa\u00fb\u0005\u000e\u0000\u0000\u00fb\u00fc"+
+		"\u0003 \u0010\u0000\u00fc\u00fd\u0006\u000f\uffff\uffff\u0000\u00fd\u0118"+
+		"\u0001\u0000\u0000\u0000\u00fe\u00ff\n\u0006\u0000\u0000\u00ff\u0100\u0005"+
+		"\u000f\u0000\u0000\u0100\u0101\u0003 \u0010\u0000\u0101\u0102\u0006\u000f"+
+		"\uffff\uffff\u0000\u0102\u0118\u0001\u0000\u0000\u0000\u0103\u0104\n\u0005"+
+		"\u0000\u0000\u0104\u0105\u0005\u0010\u0000\u0000\u0105\u0106\u0003 \u0010"+
+		"\u0000\u0106\u0107\u0006\u000f\uffff\uffff\u0000\u0107\u0118\u0001\u0000"+
+		"\u0000\u0000\u0108\u0109\n\u0004\u0000\u0000\u0109\u010a\u0005\u0011\u0000"+
+		"\u0000\u010a\u010b\u0003 \u0010\u0000\u010b\u010c\u0006\u000f\uffff\uffff"+
+		"\u0000\u010c\u0118\u0001\u0000\u0000\u0000\u010d\u010e\n\u0003\u0000\u0000"+
+		"\u010e\u010f\u0005\u0012\u0000\u0000\u010f\u0110\u0003 \u0010\u0000\u0110"+
+		"\u0111\u0006\u000f\uffff\uffff\u0000\u0111\u0118\u0001\u0000\u0000\u0000"+
+		"\u0112\u0113\n\u0002\u0000\u0000\u0113\u0114\u0005\u0013\u0000\u0000\u0114"+
+		"\u0115\u0003 \u0010\u0000\u0115\u0116\u0006\u000f\uffff\uffff\u0000\u0116"+
+		"\u0118\u0001\u0000\u0000\u0000\u0117\u00f9\u0001\u0000\u0000\u0000\u0117"+
+		"\u00fe\u0001\u0000\u0000\u0000\u0117\u0103\u0001\u0000\u0000\u0000\u0117"+
+		"\u0108\u0001\u0000\u0000\u0000\u0117\u010d\u0001\u0000\u0000\u0000\u0117"+
+		"\u0112\u0001\u0000\u0000\u0000\u0118\u011b\u0001\u0000\u0000\u0000\u0119"+
+		"\u0117\u0001\u0000\u0000\u0000\u0119\u011a\u0001\u0000\u0000\u0000\u011a"+
+		"\u001f\u0001\u0000\u0000\u0000\u011b\u0119\u0001\u0000\u0000\u0000\u011c"+
+		"\u011d\u0006\u0010\uffff\uffff\u0000\u011d\u011e\u0003\"\u0011\u0000\u011e"+
+		"\u011f\u0006\u0010\uffff\uffff\u0000\u011f\u012c\u0001\u0000\u0000\u0000"+
+		"\u0120\u0121\n\u0003\u0000\u0000\u0121\u0122\u0005\u0017\u0000\u0000\u0122"+
+		"\u0123\u0003\"\u0011\u0000\u0123\u0124\u0006\u0010\uffff\uffff\u0000\u0124"+
+		"\u012b\u0001\u0000\u0000\u0000\u0125\u0126\n\u0002\u0000\u0000\u0126\u0127"+
+		"\u0005\u0018\u0000\u0000\u0127\u0128\u0003\"\u0011\u0000\u0128\u0129\u0006"+
+		"\u0010\uffff\uffff\u0000\u0129\u012b\u0001\u0000\u0000\u0000\u012a\u0120"+
+		"\u0001\u0000\u0000\u0000\u012a\u0125\u0001\u0000\u0000\u0000\u012b\u012e"+
+		"\u0001\u0000\u0000\u0000\u012c\u012a\u0001\u0000\u0000\u0000\u012c\u012d"+
+		"\u0001\u0000\u0000\u0000\u012d!\u0001\u0000\u0000\u0000\u012e\u012c\u0001"+
+		"\u0000\u0000\u0000\u012f\u0130\u0006\u0011\uffff\uffff\u0000\u0130\u0131"+
+		"\u0003$\u0012\u0000\u0131\u0132\u0006\u0011\uffff\uffff\u0000\u0132\u0144"+
+		"\u0001\u0000\u0000\u0000\u0133\u0134\n\u0004\u0000\u0000\u0134\u0135\u0005"+
+		"\u0014\u0000\u0000\u0135\u0136\u0003$\u0012\u0000\u0136\u0137\u0006\u0011"+
+		"\uffff\uffff\u0000\u0137\u0143\u0001\u0000\u0000\u0000\u0138\u0139\n\u0003"+
+		"\u0000\u0000\u0139\u013a\u0005\u0015\u0000\u0000\u013a\u013b\u0003$\u0012"+
+		"\u0000\u013b\u013c\u0006\u0011\uffff\uffff\u0000\u013c\u0143\u0001\u0000"+
+		"\u0000\u0000\u013d\u013e\n\u0002\u0000\u0000\u013e\u013f\u0005\u0016\u0000"+
+		"\u0000\u013f\u0140\u0003$\u0012\u0000\u0140\u0141\u0006\u0011\uffff\uffff"+
+		"\u0000\u0141\u0143\u0001\u0000\u0000\u0000\u0142\u0133\u0001\u0000\u0000"+
+		"\u0000\u0142\u0138\u0001\u0000\u0000\u0000\u0142\u013d\u0001\u0000\u0000"+
+		"\u0000\u0143\u0146\u0001\u0000\u0000\u0000\u0144\u0142\u0001\u0000\u0000"+
+		"\u0000\u0144\u0145\u0001\u0000\u0000\u0000\u0145#\u0001\u0000\u0000\u0000"+
+		"\u0146\u0144\u0001\u0000\u0000\u0000\u0147\u0148\u0005#\u0000\u0000\u0148"+
+		"\u0149\u0003$\u0012\u0000\u0149\u014a\u0006\u0012\uffff\uffff\u0000\u014a"+
+		"\u0161\u0001\u0000\u0000\u0000\u014b\u014c\u0005\u0017\u0000\u0000\u014c"+
+		"\u014d\u0003$\u0012\u0000\u014d\u014e\u0006\u0012\uffff\uffff\u0000\u014e"+
+		"\u0161\u0001\u0000\u0000\u0000\u014f\u0150\u0005\u0018\u0000\u0000\u0150"+
+		"\u0151\u0003$\u0012\u0000\u0151\u0152\u0006\u0012\uffff\uffff\u0000\u0152"+
+		"\u0161\u0001\u0000\u0000\u0000\u0153\u0154\u0005\u0019\u0000\u0000\u0154"+
+		"\u0155\u0003$\u0012\u0000\u0155\u0156\u0006\u0012\uffff\uffff\u0000\u0156"+
+		"\u0161\u0001\u0000\u0000\u0000\u0157\u0158\u0005\u0010\u0000\u0000\u0158"+
+		"\u0159\u0003\u0014\n\u0000\u0159\u015a\u0005\u0011\u0000\u0000\u015a\u015b"+
+		"\u0003$\u0012\u0000\u015b\u015c\u0006\u0012\uffff\uffff\u0000\u015c\u0161"+
+		"\u0001\u0000\u0000\u0000\u015d\u015e\u0003&\u0013\u0000\u015e\u015f\u0006"+
+		"\u0012\uffff\uffff\u0000\u015f\u0161\u0001\u0000\u0000\u0000\u0160\u0147"+
+		"\u0001\u0000\u0000\u0000\u0160\u014b\u0001\u0000\u0000\u0000\u0160\u014f"+
+		"\u0001\u0000\u0000\u0000\u0160\u0153\u0001\u0000\u0000\u0000\u0160\u0157"+
+		"\u0001\u0000\u0000\u0000\u0160\u015d\u0001\u0000\u0000\u0000\u0161%\u0001"+
+		"\u0000\u0000\u0000\u0162\u0163\u0006\u0013\uffff\uffff\u0000\u0163\u0164"+
+		"\u0003(\u0014\u0000\u0164\u0165\u0006\u0013\uffff\uffff\u0000\u0165\u0175"+
+		"\u0001\u0000\u0000\u0000\u0166\u0167\n\u0004\u0000\u0000\u0167\u0168\u0005"+
+		"\u0019\u0000\u0000\u0168\u0174\u0006\u0013\uffff\uffff\u0000\u0169\u016a"+
+		"\n\u0003\u0000\u0000\u016a\u016b\u0005\n\u0000\u0000\u016b\u016c\u0005"+
+		",\u0000\u0000\u016c\u0174\u0006\u0013\uffff\uffff\u0000\u016d\u016e\n"+
+		"\u0002\u0000\u0000\u016e\u016f\u0005\b\u0000\u0000\u016f\u0170\u0003\u001a"+
+		"\r\u0000\u0170\u0171\u0005\t\u0000\u0000\u0171\u0172\u0006\u0013\uffff"+
+		"\uffff\u0000\u0172\u0174\u0001\u0000\u0000\u0000\u0173\u0166\u0001\u0000"+
+		"\u0000\u0000\u0173\u0169\u0001\u0000\u0000\u0000\u0173\u016d\u0001\u0000"+
+		"\u0000\u0000\u0174\u0177\u0001\u0000\u0000\u0000\u0175\u0173\u0001\u0000"+
+		"\u0000\u0000\u0175\u0176\u0001\u0000\u0000\u0000\u0176\'\u0001\u0000\u0000"+
+		"\u0000\u0177\u0175\u0001\u0000\u0000\u0000\u0178\u0179\u0005\u0004\u0000"+
+		"\u0000\u0179\u017a\u0003\u001a\r\u0000\u017a\u017b\u0005\u0005\u0000\u0000"+
+		"\u017b\u017c\u0006\u0014\uffff\uffff\u0000\u017c\u0187\u0001\u0000\u0000"+
+		"\u0000\u017d\u017e\u0005%\u0000\u0000\u017e\u017f\u0005\u0004\u0000\u0000"+
+		"\u017f\u0180\u0003\u0014\n\u0000\u0180\u0181\u0005\u0005\u0000\u0000\u0181"+
+		"\u0182\u0006\u0014\uffff\uffff\u0000\u0182\u0187\u0001\u0000\u0000\u0000"+
+		"\u0183\u0184\u0003*\u0015\u0000\u0184\u0185\u0006\u0014\uffff\uffff\u0000"+
+		"\u0185\u0187\u0001\u0000\u0000\u0000\u0186\u0178\u0001\u0000\u0000\u0000"+
+		"\u0186\u017d\u0001\u0000\u0000\u0000\u0186\u0183\u0001\u0000\u0000\u0000"+
+		"\u0187)\u0001\u0000\u0000\u0000\u0188\u0189\u0005\"\u0000\u0000\u0189"+
+		"\u01a3\u0006\u0015\uffff\uffff\u0000\u018a\u018b\u0005*\u0000\u0000\u018b"+
+		"\u01a3\u0006\u0015\uffff\uffff\u0000\u018c\u018d\u0005+\u0000\u0000\u018d"+
+		"\u01a3\u0006\u0015\uffff\uffff\u0000\u018e\u018f\u0005\u0002\u0000\u0000"+
+		"\u018f\u01a3\u0006\u0015\uffff\uffff\u0000\u0190\u0191\u0005\u0001\u0000"+
+		"\u0000\u0191\u01a3\u0006\u0015\uffff\uffff\u0000\u0192\u0193\u0005\u0003"+
+		"\u0000\u0000\u0193\u01a3\u0006\u0015\uffff\uffff\u0000\u0194\u0195\u0005"+
+		"!\u0000\u0000\u0195\u01a3\u0006\u0015\uffff\uffff\u0000\u0196\u0197\u0005"+
+		",\u0000\u0000\u0197\u01a3\u0006\u0015\uffff\uffff\u0000\u0198\u0199\u0005"+
+		",\u0000\u0000\u0199\u019a\u0005\u0004\u0000\u0000\u019a\u019b\u0005\u0005"+
+		"\u0000\u0000\u019b\u01a3\u0006\u0015\uffff\uffff\u0000\u019c\u019d\u0005"+
+		",\u0000\u0000\u019d\u019e\u0005\u0004\u0000\u0000\u019e\u019f\u0003,\u0016"+
+		"\u0000\u019f\u01a0\u0005\u0005\u0000\u0000\u01a0\u01a1\u0006\u0015\uffff"+
+		"\uffff\u0000\u01a1\u01a3\u0001\u0000\u0000\u0000\u01a2\u0188\u0001\u0000"+
+		"\u0000\u0000\u01a2\u018a\u0001\u0000\u0000\u0000\u01a2\u018c\u0001\u0000"+
+		"\u0000\u0000\u01a2\u018e\u0001\u0000\u0000\u0000\u01a2\u0190\u0001\u0000"+
+		"\u0000\u0000\u01a2\u0192\u0001\u0000\u0000\u0000\u01a2\u0194\u0001\u0000"+
+		"\u0000\u0000\u01a2\u0196\u0001\u0000\u0000\u0000\u01a2\u0198\u0001\u0000"+
+		"\u0000\u0000\u01a2\u019c\u0001\u0000\u0000\u0000\u01a3+\u0001\u0000\u0000"+
+		"\u0000\u01a4\u01a5\u0003\u001a\r\u0000\u01a5\u01a6\u0006\u0016\uffff\uffff"+
+		"\u0000\u01a6\u01ad\u0001\u0000\u0000\u0000\u01a7\u01a8\u0003\u001a\r\u0000"+
+		"\u01a8\u01a9\u0005\u000b\u0000\u0000\u01a9\u01aa\u0003,\u0016\u0000\u01aa"+
+		"\u01ab\u0006\u0016\uffff\uffff\u0000\u01ab\u01ad\u0001\u0000\u0000\u0000"+
+		"\u01ac\u01a4\u0001\u0000\u0000\u0000\u01ac\u01a7\u0001\u0000\u0000\u0000"+
+		"\u01ad-\u0001\u0000\u0000\u0000\u001a9DS^`ly\u008b\u009f\u00a8\u00c8\u00d2"+
+		"\u00e4\u00f2\u0117\u0119\u012a\u012c\u0142\u0144\u0160\u0173\u0175\u0186"+
+		"\u01a2\u01ac";
+	public static final ATN _ATN =
+		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
+	static {
+		_decisionToDFA = new DFA[_ATN.getNumberOfDecisions()];
+		for (int i = 0; i < _ATN.getNumberOfDecisions(); i++) {
+			_decisionToDFA[i] = new DFA(_ATN.getDecisionState(i), i);
+		}
+	}
+}

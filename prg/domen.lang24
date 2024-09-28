@@ -1,0 +1,30 @@
+putint(i:int):void
+putchar(c:char):void
+new(sz:int):^void
+del(pt:^void):void
+
+str = (b:(c:char))
+
+fun(i:int):^str = {
+    if i == 0 then {
+        r = 'a';
+    } else {
+        r = 'b';
+    }
+    ptr = new(sizeof(str));
+    ptr^.b.c = r;
+    return ptr;
+} {ptr : ^str r : char loc:str}
+
+main():int=
+    {
+        p1 = fun(0);
+        putchar(p1^.b.c);
+        putchar('\n');
+        p2 = fun(1);
+        putchar(p1^.b.c);
+        putchar('\n');
+        putchar(p2^.b.c);
+        putchar('\n');
+    }
+    {p1 : ^str p2 : ^str}

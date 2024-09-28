@@ -1,0 +1,8 @@
+putint(i:int):void
+
+g : int
+
+main(): void = {
+	g =  5;
+	putint(sizeof(int));
+}

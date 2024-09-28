@@ -1,0 +1,14 @@
+c : ^char
+
+putchar(c:char) : void
+
+main() : void = {
+
+	c = "nekineki\n";
+
+	while (c^ != '\00') : {
+		putchar(c^);
+		c = <^char> (<int> c + 8);
+	}
+
+}

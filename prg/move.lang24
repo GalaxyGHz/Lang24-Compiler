@@ -1,0 +1,4 @@
+i : int
+main() : void = {
+	i = i + 0;
+}

@@ -1,0 +1,8 @@
+a : int
+b : int
+c : int
+
+main() : void = {
+
+	c = a + b;
+}
